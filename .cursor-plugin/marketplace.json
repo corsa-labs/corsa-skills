@@ -11,7 +11,7 @@
     {
       "name": "corsa-integration",
       "source": "corsa-integration",
-      "description": "Guide developers through Corsa API integration -- SDK setup, data ingestion, webhooks, encryption",
+      "description": "Guide developers through Corsa API integration -- SDK setup, data ingestion, webhooks",
       "keywords": ["compliance", "fintech", "sdk", "kyc", "aml", "transaction-monitoring"]
     },
     {

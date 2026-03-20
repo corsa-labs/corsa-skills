@@ -30,23 +30,6 @@ OpenAPI.HEADERS = {
 const client = new CorsaClient();
 ```
 
-### Encrypted Client (BYOK)
-
-```typescript
-import { EncryptedCorsaClient } from '@corsa-labs/sdk';
-
-const client = EncryptedCorsaClient.withEncryptedFields(
-  {
-    baseUrl: "https://api.corsa.finance",
-    apiKey: process.env.API_TOKEN!,
-    apiSecret: process.env.API_SECRET,
-    encryptionServiceUrl: "https://your-encryption-service.example.com",
-    passAuthToEncryption: true,
-  },
-  encryptionSchema // EncryptedFieldSchema
-);
-```
-
 ### Configuration Options
 
 | Option | Type | Default | Description |
@@ -606,7 +589,7 @@ Access: `client.platform`
 
 | Method | Description |
 |--------|-------------|
-| `getEncryptionConfiguration()` | Get the platform's encryption configuration |
+| `getEncryptionConfiguration()` | Get the platform's configuration |
 
 ---
 

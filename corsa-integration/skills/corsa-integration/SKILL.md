@@ -3,7 +3,7 @@ name: corsa-integration
 description: >
   Guide developers through Corsa compliance API integration using the
   @corsa-labs/sdk. Covers SDK setup, authentication, data ingestion order,
-  webhook handling, BYOK encryption, and error handling. Use when integrating
+  webhook handling, and error handling. Use when integrating
   with Corsa, setting up the Corsa SDK, ingesting clients/transactions/alerts,
   configuring webhooks, or handling API errors.
 ---
@@ -118,7 +118,7 @@ The `CorsaClient` exposes 17 services. Access them as properties on the client i
 | `evaluation` | `client.evaluation` | Evaluate rules against transactions |
 | `checklists` | `client.checklists` | Checklist and template management |
 | `attachments` | `client.attachments` | File upload, download URLs, entity linking |
-| `platform` | `client.platform` | Platform encryption config |
+| `platform` | `client.platform` | Platform configuration |
 
 For the full method reference for each service, see [references/REFERENCE.md](references/REFERENCE.md).
 
@@ -253,41 +253,6 @@ app.post('/webhook', (req, res) => {
 | `blockchain_wallet.created` / `.updated` | Wallet changes |
 | `bank_account.created` / `.updated` | Bank account changes |
 
-## BYOK / Field-Level Encryption
-
-For enterprise customers with Bring Your Own Key (BYOK) encryption:
-
-```typescript
-import { EncryptedCorsaClient, EncryptedFieldSchema } from '@corsa-labs/sdk';
-
-const encryptionSchema: EncryptedFieldSchema = {
-  fields: {
-    emailAddress: { type: 'string', encrypt: true, validate: true },
-    phoneNumber: { type: 'string', encrypt: true },
-    personalId: { type: 'string', encrypt: true, generateHash: true },
-  },
-  operations: {
-    '/v1/clients/individuals': {
-      contact: ['emailAddress', 'phoneNumber'],
-      general: ['personalId'],
-    },
-  },
-};
-
-const client = EncryptedCorsaClient.withEncryptedFields(
-  {
-    baseUrl: 'https://api.corsa.finance',
-    apiKey: process.env.API_TOKEN!,
-    apiSecret: process.env.API_SECRET,
-    encryptionServiceUrl: 'https://your-encryption-service.example.com',
-    passAuthToEncryption: true,
-  },
-  encryptionSchema
-);
-
-// Use the client normally — specified fields are encrypted transparently
-```
-
 ## Critical Rules
 
 1. **Use `CorsaClient`** — `ComplianceClient` is a deprecated alias
@@ -295,10 +260,9 @@ const client = EncryptedCorsaClient.withEncryptedFields(
 3. **Auth format is `Bearer <TOKEN>:<SECRET>`** — not just the token alone
 4. **Provide `referenceId`** — your internal system ID for the entity; you can use either `referenceId` or Corsa's generated `id` in subsequent API calls
 5. **Use the `HEADERS` constructor option** — the `TOKEN` config field is deprecated
-6. **Use `EncryptedCorsaClient`** — `EncryptedComplianceClient` is a deprecated alias
-7. **Operations `initiatedBy` expects a Corsa `id`** — use the `id` returned from client creation
-8. **Rate limit is 500 req/60s** — implement retry with `Retry-After` header
-9. **Webhook raw body** — use `express.raw()` not `express.json()` for signature verification
+6. **Operations `initiatedBy` expects a Corsa `id`** — use the `id` returned from client creation
+7. **Rate limit is 500 req/60s** — implement retry with `Retry-After` header
+8. **Webhook raw body** — use `express.raw()` not `express.json()` for signature verification
 
 ## Common Pitfalls
 
