@@ -382,12 +382,13 @@ Access: `client.alerts`
 ```typescript
 const alert = await client.alerts.createAlert({
   referenceId: "ALERT-001",
-  title: "High-value transaction from sanctioned jurisdiction",
-  description: "Transaction of $50,000 from a sanctioned country",
-  severity: "HIGH",
-  category: "SANCTIONS",
-  clientIds: ["client-uuid-123"],
-  transactionIds: ["tx-uuid-456"],
+  description: "High-value transaction of $50,000 from a sanctioned country",
+  category: "SCREENING_SANCTIONS",
+  priority: "HIGH",
+  status: "NEW",
+  raisedAt: "2024-01-15T12:00:00Z",
+  associatedClients: ["client-uuid-123"],
+  associatedTransactions: ["tx-uuid-456"],
 });
 ```
 
@@ -442,7 +443,7 @@ const account = await client.bankAccounts.createBankAccount(
 );
 
 await client.bankAccounts.associateBankAccountWithClients(account.id, {
-  clientIds: ["client-uuid-123"],
+  clients: [{ clientId: "client-uuid-123" }],
 });
 ```
 
@@ -475,7 +476,7 @@ const wallet = await client.blockchainWallets.createBlockchainWallet(
 );
 
 await client.blockchainWallets.associateBlockchainWalletWithClients(wallet.id, {
-  clientIds: ["client-uuid-123"],
+  associatedClients: [{ clientId: "client-uuid-123" }],
 });
 ```
 

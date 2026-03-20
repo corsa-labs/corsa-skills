@@ -1,0 +1,11 @@
+{
+  "name": "corsa-data-pipeline",
+  "description": "AI-powered assistant for building production data pipelines to Corsa — backfill, real-time sync, entity mapping",
+  "version": "1.0.0",
+  "author": { "name": "Corsa Labs" },
+  "homepage": "https://docs.corsa.finance",
+  "repository": "https://github.com/corsa-labs/corsa-skills",
+  "license": "MIT",
+  "keywords": ["compliance", "fintech", "data-pipeline", "backfill", "sync", "exchange", "payments"],
+  "logo": "assets/logo.svg"
+}

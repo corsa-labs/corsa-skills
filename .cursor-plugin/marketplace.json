@@ -23,6 +23,12 @@
       "name": "corsa-rule-authoring",
       "source": "corsa-rule-authoring",
       "description": "Create and manage Corsa compliance rules and transaction monitoring policies"
+    },
+    {
+      "name": "corsa-data-pipeline",
+      "source": "corsa-data-pipeline",
+      "description": "Build production data pipelines to Corsa — backfill, real-time sync, entity mapping for exchanges and payment companies",
+      "keywords": ["compliance", "fintech", "data-pipeline", "backfill", "sync", "exchange", "payments"]
     }
   ]
 }

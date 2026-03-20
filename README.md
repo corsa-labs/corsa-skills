@@ -9,6 +9,7 @@ AI skills for integrating with the [Corsa](https://corsa.finance) compliance pla
 | **corsa-integration** | Available | Full API integration guide — SDK setup, authentication, data ingestion, webhooks |
 | **corsa-webhook-debugging** | Available | Debug webhook delivery, signature verification, and event handling |
 | **corsa-rule-authoring** | Available | Create and manage compliance rules for transaction monitoring |
+| **corsa-data-pipeline** | Available | Build production data pipelines — backfill, real-time sync, entity mapping |
 
 ## Installation
 
