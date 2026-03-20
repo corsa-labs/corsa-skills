@@ -1,0 +1,28 @@
+{
+  "name": "corsa-skills",
+  "owner": {
+    "name": "Corsa Labs",
+    "email": "support@corsa.finance"
+  },
+  "metadata": {
+    "description": "AI skills for integrating with the Corsa compliance platform"
+  },
+  "plugins": [
+    {
+      "name": "corsa-integration",
+      "source": "corsa-integration",
+      "description": "Guide developers through Corsa API integration -- SDK setup, data ingestion, webhooks, encryption",
+      "keywords": ["compliance", "fintech", "sdk", "kyc", "aml", "transaction-monitoring"]
+    },
+    {
+      "name": "corsa-webhook-debugging",
+      "source": "corsa-webhook-debugging",
+      "description": "Debug Corsa webhook delivery, signature verification, and event handling issues"
+    },
+    {
+      "name": "corsa-rule-authoring",
+      "source": "corsa-rule-authoring",
+      "description": "Create and manage Corsa compliance rules and transaction monitoring policies"
+    }
+  ]
+}

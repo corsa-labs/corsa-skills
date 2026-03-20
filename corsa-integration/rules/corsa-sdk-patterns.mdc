@@ -1,0 +1,14 @@
+---
+description: Corsa SDK coding conventions — use CorsaClient, proper auth format, referenceId patterns
+alwaysApply: false
+globs: "**/*.ts"
+---
+
+- Use `CorsaClient` from `@corsa-labs/sdk` — `ComplianceClient` is deprecated
+- Use `RiskDto.level` for risk levels — `ClientRiskDto` is stale / does not exist in the SDK exports
+- Authentication format: `Bearer <API_TOKEN>:<API_SECRET>` in the `Authorization` header
+- Always provide a `referenceId` when creating entities to enable upsert behavior
+- Configure the client via the constructor `HEADERS` option — the `TOKEN` field is deprecated
+- Base URLs: US `https://api.corsa.finance`, EU `https://api.eu.corsa.finance`
+- Rate limit: 500 requests per 60 seconds per user — respect `Retry-After` header on 429
+- All entity creation endpoints support `upsert=true` to update-or-create by `referenceId`
