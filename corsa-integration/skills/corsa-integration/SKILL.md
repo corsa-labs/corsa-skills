@@ -222,7 +222,7 @@ app.post('/webhook', (req, res) => {
     return res.status(403).send('Invalid signature');
   }
 
-  const event: WebhookEvent<unknown, unknown> = JSON.parse(rawBody);
+  const event = JSON.parse(rawBody) as { type: string; timestamp: string; data: Record<string, unknown> };
 
   switch (event.type) {
     case WebhookEventType.INDIVIDUAL_CLIENT_CREATED:
@@ -259,7 +259,7 @@ app.post('/webhook', (req, res) => {
 2. **Use `RiskDto.level`** for risk enums — `ClientRiskDto` does not exist in SDK exports
 3. **Auth format is `Bearer <TOKEN>:<SECRET>`** — not just the token alone
 4. **Provide `referenceId`** — your internal system ID for the entity; you can use either `referenceId` or Corsa's generated `id` in subsequent API calls
-5. **Use the `HEADERS` constructor option** — the `TOKEN` config field is deprecated
+5. **Use the `HEADERS` constructor option for auth** — `TOKEN` only sets `Bearer <value>` which doesn't support the `TOKEN:SECRET` compound format
 6. **Operations `initiatedBy` expects a Corsa `id`** — use the `id` returned from client creation
 7. **Rate limit is 500 req/60s** — implement retry with `Retry-After` header
 8. **Webhook raw body** — use `express.raw()` not `express.json()` for signature verification

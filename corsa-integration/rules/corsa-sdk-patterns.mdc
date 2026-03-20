@@ -8,7 +8,7 @@ globs: "**/*.ts"
 - Use `RiskDto.level` for risk levels — `ClientRiskDto` is stale / does not exist in the SDK exports
 - Authentication format: `Bearer <API_TOKEN>:<API_SECRET>` in the `Authorization` header
 - Provide `referenceId` (your internal system ID) when creating entities — you can use either `referenceId` or Corsa's generated `id` in subsequent calls
-- Configure the client via the constructor `HEADERS` option — the `TOKEN` field is deprecated
+- Configure auth via the constructor `HEADERS` option — `TOKEN` only sets `Bearer <value>` which doesn't support Corsa's `TOKEN:SECRET` compound format
 - Base URLs: US `https://api.corsa.finance`, EU `https://api.eu.corsa.finance`
 - Rate limit: 500 requests per 60 seconds per user — respect `Retry-After` header on 429
 - Creation endpoints support `upsert=true` to update-or-create by `referenceId`

@@ -223,7 +223,11 @@ import {
 } from '@corsa-labs/sdk';
 ```
 
-For events not covered by the SDK types (transactions, deposits, trades, etc.), use the generic `WebhookEvent<unknown, unknown>` and check `event.type` as a string.
+**Coverage note:** The SDK provides typed event aliases for individual clients, corporate clients, and alerts only. Case events exist in the `WebhookEventType` enum (`CASE_CREATED`, `CASE_UPDATED`) but have no typed aliases. For cases, transactions, deposits, trades, members, wallets, and bank accounts, parse the payload as a plain object and switch on `event.type` as a string:
+
+```typescript
+const event = JSON.parse(rawBody) as { type: string; timestamp: string; data: Record<string, unknown> };
+```
 
 ## Links
 

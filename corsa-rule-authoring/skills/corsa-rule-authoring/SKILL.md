@@ -144,8 +144,10 @@ Conditions define **when** a rule matches. They use boolean logic with `all` (AN
 | `lessThan` | Less than (exclusive) |
 | `lessThanInclusive` | Less than or equal |
 | `contains` | String/array contains |
+| `doesNotContain` | String/array does not contain |
 | `in` | Value is in a list |
 | `notIn` | Value is not in a list |
+| `between` | Value is between two bounds |
 
 ### Aggregation Conditions (Rolling Thresholds)
 

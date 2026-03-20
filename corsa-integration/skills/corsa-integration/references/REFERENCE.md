@@ -36,7 +36,7 @@ const client = new CorsaClient();
 |--------|------|---------|-------------|
 | `BASE` | `string` | `''` | API base URL |
 | `HEADERS` | `Record<string, string>` | `undefined` | Custom headers (use for auth) |
-| `TOKEN` | `string` | `undefined` | Bearer token (deprecated — use HEADERS) |
+| `TOKEN` | `string` | `undefined` | Bearer token (sets `Bearer <value>` — use HEADERS for Corsa's `TOKEN:SECRET` format) |
 | `USERNAME` | `string` | `undefined` | Basic auth username |
 | `PASSWORD` | `string` | `undefined` | Basic auth password |
 | `WITH_CREDENTIALS` | `boolean` | `false` | Include credentials in requests |
@@ -653,17 +653,27 @@ All events follow the pattern `<entity>.<action>` where action is `created` or `
 ### Webhook Payload Structure
 
 ```typescript
-interface WebhookEvent<Entity> {
-  data: {
-    id: string;
-    referenceId?: string;
-    entity: Entity;     // for .created events
-    // or
-    updated: Partial<Entity>; // for .updated events
-  };
-  type: string; // WebhookEventType enum value
+// SDK generic types (two type parameters):
+interface WebhookEvent<M, T extends EntityCreatedPayload<M> | EntityUpdatedPayload<M>> {
+  data: T;
+  type: WebhookEventType;
   timestamp: string;
 }
+
+interface EntityCreatedPayload<T> {
+  id: string;
+  referenceId?: string;
+  entity: T;
+}
+
+interface EntityUpdatedPayload<T> {
+  id: string;
+  referenceId?: string;
+  updated: Partial<T>;
+}
+
+// For a generic handler, parse without SDK generics:
+const event = JSON.parse(rawBody) as { type: string; timestamp: string; data: Record<string, unknown> };
 ```
 
 ### Webhook Headers
@@ -713,7 +723,7 @@ app.post('/webhook', (req, res) => {
     return res.status(403).send('Invalid signature');
   }
 
-  const event: WebhookEvent<unknown, unknown> = JSON.parse(rawBody);
+  const event = JSON.parse(rawBody) as { type: string; timestamp: string; data: Record<string, unknown> };
 
   switch (event.type) {
     case WebhookEventType.INDIVIDUAL_CLIENT_CREATED:
