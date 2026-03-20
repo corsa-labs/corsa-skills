@@ -121,7 +121,7 @@ const { id } = await client.clients.createIndividualClient(
     politicalExposure: { isPoliticallyExposed: false },
     adverseMedia: { isAdverseMedia: false },
   },
-  true // upsert — update if referenceId exists
+  true // upsert — update if an entity with this referenceId already exists
 );
 ```
 

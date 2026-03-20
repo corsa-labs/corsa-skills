@@ -124,9 +124,9 @@ For the full method reference for each service, see [references/REFERENCE.md](re
 
 ## Common Patterns
 
-### Upsert via referenceId
+### referenceId and Upsert
 
-Most creation endpoints support `upsert=true`. When a `referenceId` already exists, the entity is updated instead of duplicated:
+The `referenceId` is the entity's identifier in your internal system. You can use either the Corsa-generated `id` or your `referenceId` when fetching, updating, or performing other operations. Most creation endpoints support `upsert=true` — when an entity with the same `referenceId` already exists, it is updated instead of duplicated:
 
 ```typescript
 const individual = await client.clients.createIndividualClient(
@@ -150,7 +150,7 @@ const individual = await client.clients.createIndividualClient(
 
 ### Linking Operations to Clients
 
-Operations reference the client who initiated them via the Corsa-generated `id` (not referenceId):
+The `initiatedBy` field on operations accepts the Corsa-generated `id` of the client who initiated the operation:
 
 ```typescript
 const deposit = await client.deposits.createDeposit({
@@ -293,10 +293,10 @@ const client = EncryptedCorsaClient.withEncryptedFields(
 1. **Use `CorsaClient`** — `ComplianceClient` is a deprecated alias
 2. **Use `RiskDto.level`** for risk enums — `ClientRiskDto` does not exist in SDK exports
 3. **Auth format is `Bearer <TOKEN>:<SECRET>`** — not just the token alone
-4. **Always provide `referenceId`** on entity creation to enable upsert and deduplication
+4. **Provide `referenceId`** — your internal system ID for the entity; you can use either `referenceId` or Corsa's generated `id` in subsequent API calls
 5. **Use the `HEADERS` constructor option** — the `TOKEN` config field is deprecated
 6. **Use `EncryptedCorsaClient`** — `EncryptedComplianceClient` is a deprecated alias
-7. **Operations reference clients by Corsa `id`** — not by `referenceId`
+7. **Operations `initiatedBy` expects a Corsa `id`** — use the `id` returned from client creation
 8. **Rate limit is 500 req/60s** — implement retry with `Retry-After` header
 9. **Webhook raw body** — use `express.raw()` not `express.json()` for signature verification
 
@@ -304,7 +304,7 @@ const client = EncryptedCorsaClient.withEncryptedFields(
 
 | Mistake | Fix |
 |---------|-----|
-| Omitting `referenceId` | Always include it — enables upsert and cross-system linking |
+| Omitting `referenceId` | Include it — it maps to your internal system ID and enables upsert via `upsert=true` |
 | Using `Bearer <TOKEN>` without secret | Format is `Bearer <TOKEN>:<SECRET>` |
 | Parsing webhook body as JSON before verification | Use `express.raw()` to get the raw Buffer, verify, then parse |
 | Creating operations before clients | Follow the ingestion order — clients must exist first |
