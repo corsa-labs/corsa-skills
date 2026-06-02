@@ -38,15 +38,8 @@ git clone https://github.com/corsa-labs/corsa-skills.git
 cp -r corsa-skills/corsa-integration/skills/corsa-integration .github/skills/
 ```
 
-### Universal CLI
-
-```bash
-npx ai-agent-skills install corsa-integration --agent cursor
-```
-
 ## Resources
 
 - [Corsa Documentation](https://docs.corsa.finance)
-- [API Reference](https://api.corsa.finance/api-docs/)
 - [SDK on npm](https://www.npmjs.com/package/@corsa-labs/sdk)
 - [Agent Skills Specification](https://agentskills.io/specification)
