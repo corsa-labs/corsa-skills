@@ -98,7 +98,7 @@ Follow this order. Entities reference their parents, so parents must exist first
 
 ## SDK Services
 
-The `CorsaClient` exposes 17 services. Access them as properties on the client instance:
+The `CorsaClient` exposes 20 services. Access them as properties on the client instance:
 
 | Service | Access | Purpose |
 |---------|--------|---------|
@@ -112,12 +112,15 @@ The `CorsaClient` exposes 17 services. Access them as properties on the client i
 | `cases` | `client.cases` | Case CRUD, bulk ops, entity association |
 | `bankAccounts` | `client.bankAccounts` | Bank account CRUD and client association |
 | `blockchainWallets` | `client.blockchainWallets` | Wallet CRUD and client association |
+| `paymentAccounts` | `client.paymentAccounts` | Payment account CRUD and client association |
 | `sessions` | `client.sessions` | Session CRUD, client session listing |
 | `rules` | `client.rules` | Compliance rule lifecycle (draft/activate/disable) |
 | `ruleTemplates` | `client.ruleTemplates` | Browse and copy rule templates |
 | `evaluation` | `client.evaluation` | Evaluate rules against transactions |
 | `checklists` | `client.checklists` | Checklist and template management |
 | `attachments` | `client.attachments` | File upload, download URLs, entity linking |
+| `subDispositions` | `client.subDispositions` | Custom sub-disposition CRUD |
+| `externalRules` | `client.externalRules` | External vendor rule management |
 | `platform` | `client.platform` | Platform configuration |
 
 For the full method reference for each service, see [references/REFERENCE.md](references/REFERENCE.md).

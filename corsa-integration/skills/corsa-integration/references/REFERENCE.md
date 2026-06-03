@@ -1,6 +1,6 @@
 # Corsa SDK — Full API Reference
 
-Complete method signatures and code templates for all 17 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
+Complete method signatures and code templates for all 20 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
 
 ## Authentication Setup
 
@@ -479,6 +479,77 @@ await client.blockchainWallets.associateBlockchainWalletWithClients(wallet.id, {
   associatedClients: [{ clientId: "client-uuid-123" }],
 });
 ```
+
+---
+
+## Payment Accounts Service
+
+Access: `client.paymentAccounts`
+
+### Methods
+
+| Method | Description |
+|--------|-------------|
+| `createPaymentAccount(requestBody, upsert?)` | Create or upsert a payment account |
+| `getPaymentAccount(paymentAccountId)` | Get by ID or referenceId |
+| `updatePaymentAccount(paymentAccountId, requestBody)` | Update a payment account |
+| `associatePaymentAccountWithClients(paymentAccountId, requestBody)` | Link to clients |
+
+### Create and Link Payment Account
+
+```typescript
+const account = await client.paymentAccounts.createPaymentAccount(
+  {
+    referenceId: "PIX-001",
+    pixKey: "john.doe@example.com",
+    country: "BRA",
+    currency: "BRL",
+  },
+  true // upsert
+);
+
+await client.paymentAccounts.associatePaymentAccountWithClients(account.id, {
+  clients: [{ clientId: "client-uuid-123" }],
+});
+```
+
+---
+
+## Sub-Dispositions Service
+
+Access: `client.subDispositions`
+
+### Methods
+
+| Method | Description |
+|--------|-------------|
+| `listSubDispositions()` | List all sub-dispositions for the current platform |
+| `createSubDisposition(requestBody)` | Create a custom sub-disposition |
+| `getSubDisposition(id)` | Get a sub-disposition by ID |
+| `updateSubDisposition(id, requestBody)` | Update a sub-disposition |
+| `deleteSubDisposition(id)` | Soft-delete a custom sub-disposition |
+
+Sub-dispositions let you categorise alert outcomes beyond the standard `TRUE_POSITIVE` / `FALSE_POSITIVE` values (e.g. "Escalated to SAR", "Customer verified").
+
+---
+
+## External Rules Service
+
+Access: `client.externalRules`
+
+### Methods
+
+| Method | Description |
+|--------|-------------|
+| `createExternalRule(requestBody)` | Create an external vendor rule |
+| `listExternalRules(page?, limit?, ...)` | List external rules with pagination |
+| `getExternalRule(id)` | Get an external rule by ID |
+| `updateExternalRule(id, requestBody)` | Update an external vendor rule |
+| `deleteExternalRule(id)` | Soft-delete an external rule |
+| `checkRuleNameExists(name)` | Check if a rule name is already taken |
+| `getVendorNames()` | Get distinct vendor names across external rules |
+
+External rules let you ingest alert signals from third-party vendors (Chainalysis, TRM Labs, etc.) and route them through Corsa's alert management workflow.
 
 ---
 
