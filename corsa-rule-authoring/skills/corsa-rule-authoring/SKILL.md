@@ -358,5 +358,5 @@ const byRule = await client.evaluation.getRuleEvaluations("rule-uuid", 1, 20);
 
 ## Links
 
-- [Rules & Evaluation Guide](https://docs.corsa.finance/api/rules-and-evaluation)
-- [API Reference](https://api.corsa.finance/api-docs/)
+- [Rules & Evaluation Guide](https://docs.corsa.finance/transaction-monitoring/rules-api)
+- [API Reference](https://api.corsa.finance/api-spec.json)
