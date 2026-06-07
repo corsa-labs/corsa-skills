@@ -281,7 +281,7 @@ app.post('/webhook', (req, res) => {
 
 ## Links
 
-- [API Reference](https://api.corsa.finance/api-docs/)
+- [API Reference](https://api.corsa.finance/api-spec.json)
 - [Documentation](https://docs.corsa.finance)
 - [SDK on npm](https://www.npmjs.com/package/@corsa-labs/sdk)
 - [Full method reference](references/REFERENCE.md)
