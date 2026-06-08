@@ -22,6 +22,9 @@ Install directly from the [Cursor Marketplace](https://cursor.com/marketplace) â
 ```bash
 git clone https://github.com/corsa-labs/corsa-skills.git
 cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.cursor/skills/
+cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline ~/.cursor/skills/
+cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging ~/.cursor/skills/
+cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring ~/.cursor/skills/
 ```
 
 ### Claude Code
@@ -29,6 +32,9 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.cursor/skills/
 ```bash
 git clone https://github.com/corsa-labs/corsa-skills.git
 cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.claude/skills/
+cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline ~/.claude/skills/
+cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging ~/.claude/skills/
+cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring ~/.claude/skills/
 ```
 
 ### VS Code / GitHub Copilot
@@ -36,6 +42,9 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.claude/skills/
 ```bash
 git clone https://github.com/corsa-labs/corsa-skills.git
 cp -r corsa-skills/corsa-integration/skills/corsa-integration .github/skills/
+cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline .github/skills/
+cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging .github/skills/
+cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring .github/skills/
 ```
 
 ## Resources
