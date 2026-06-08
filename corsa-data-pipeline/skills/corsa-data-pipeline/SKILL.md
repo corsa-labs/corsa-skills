@@ -280,5 +280,5 @@ const corsaClientId = await idMapping.getCorsaId('client', internalUserId);
 
 - [Data Ingestion Guide](https://docs.corsa.finance/api/data-ingestion)
 - [SDK on npm](https://www.npmjs.com/package/@corsa-labs/sdk)
-- [API Reference](https://api.corsa.finance/api-docs/)
+- [API Reference](https://api.corsa.finance/api-spec.json)
 - [Full code templates](references/REFERENCE.md)
