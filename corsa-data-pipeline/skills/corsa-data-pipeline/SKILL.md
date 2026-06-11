@@ -30,6 +30,7 @@ Map the developer's existing entities to Corsa's data model:
 | Fiat withdrawals (outgoing payments) | `Withdrawal` | `client.withdrawals.createWithdrawal` | `initiatedBy` must be a Corsa client ID |
 | Crypto receives | `Deposit` | `client.deposits.createDeposit` | Add `txHash`, `blockchainNetworkId` to transaction |
 | Crypto sends | `Withdrawal` | `client.withdrawals.createWithdrawal` | Add `txHash`, `blockchainNetworkId` to transaction |
+| Peer-to-peer transfers between clients | `Transfer` | `client.transfers.createTransfer` | `from.client` and `to.client` required on the transaction to link both parties |
 | Trades / swaps / conversions | `Trade` | `client.trades.createTrade` | Each fill is a transaction; use `shouldAppendToExistingTrade` for incremental fills |
 | Compliance alerts | `Alert` | `client.alerts.createAlert` | Batch up to 50 with `createAlertsBatch` |
 | Investigation cases | `Case` | `client.cases.createCase` | `status` forced to `NEW` on creation |
@@ -280,5 +281,5 @@ const corsaClientId = await idMapping.getCorsaId('client', internalUserId);
 
 - [Data Ingestion Guide](https://docs.corsa.finance/api/data-ingestion)
 - [SDK on npm](https://www.npmjs.com/package/@corsa-labs/sdk)
-- [API Reference](https://api.corsa.finance/api-docs/)
+- [API Reference](https://api.corsa.finance/api-spec.json)
 - [Full code templates](references/REFERENCE.md)

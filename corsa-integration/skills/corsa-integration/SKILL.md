@@ -98,7 +98,7 @@ Follow this order. Entities reference their parents, so parents must exist first
 
 ## SDK Services
 
-The `CorsaClient` exposes 20 services. Access them as properties on the client instance:
+The `CorsaClient` exposes 21 services. Access them as properties on the client instance:
 
 | Service | Access | Purpose |
 |---------|--------|---------|
@@ -106,6 +106,7 @@ The `CorsaClient` exposes 20 services. Access them as properties on the client i
 | `members` | `client.members` | UBO/Director/Signatory management |
 | `deposits` | `client.deposits` | Deposit operations |
 | `withdrawals` | `client.withdrawals` | Withdrawal operations |
+| `transfers` | `client.transfers` | Peer-to-peer transfer operations between clients |
 | `trades` | `client.trades` | Trade operations, fill appending |
 | `transactions` | `client.transactions` | Transaction retrieval and status updates |
 | `alerts` | `client.alerts` | Alert CRUD, batch create, bulk ops |
