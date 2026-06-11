@@ -1,6 +1,6 @@
 # Corsa SDK — Full API Reference
 
-Complete method signatures and code templates for all 20 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
+Complete method signatures and code templates for all 21 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
 
 ## Authentication Setup
 
@@ -893,4 +893,4 @@ For developers using the REST API directly (curl, fetch, etc.), all endpoints ar
 | Blockchain Wallets | `POST /v1/blockchain-wallets?upsert=true` | `GET /v1/blockchain-wallets/{id}` | `PUT /v1/blockchain-wallets/{id}` |
 | Sessions | `POST /v1/sessions` | `GET /v1/sessions/{id}` | `PUT /v1/sessions/{id}` |
 
-Full endpoint documentation: [API Reference](https://api.corsa.finance/api-docs/)
+Full endpoint documentation: [API Reference](https://api.corsa.finance/api-spec.json)

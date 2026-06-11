@@ -234,4 +234,4 @@ const event = JSON.parse(rawBody) as { type: string; timestamp: string; data: Re
 - [Webhook Setup Guide](https://docs.corsa.finance/webhooks)
 - [Event Payloads Reference](https://docs.corsa.finance/webhooks/event-payloads)
 - [Webhook Handler Example](https://docs.corsa.finance/sdk/webhook-example)
-- [API Reference](https://api.corsa.finance/api-docs/)
+- [API Reference](https://api.corsa.finance/api-spec.json)
