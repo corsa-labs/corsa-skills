@@ -25,6 +25,7 @@ Map the developer's existing entities to Corsa's data model:
 | Corporate officers, UBOs, directors | `IndividualMember` / `CorporateMember` | `client.members.createIndividualMember` | Link to corporate client via `corporates` array |
 | Bank accounts | `BankAccount` | `client.bankAccounts.createBankAccount` | Then call `associateBankAccountWithClients` to link |
 | Crypto wallets | `BlockchainWallet` | `client.blockchainWallets.createBlockchainWallet` | Then call `associateBlockchainWalletWithClients` to link |
+| PIX keys, CLABE numbers, mobile money accounts | `PaymentAccount` | `client.paymentAccounts.createPaymentAccount` | Then call `associatePaymentAccountWithClients` to link |
 | Login / activity sessions | `Session` | `client.sessions.createSession` | Requires `clientId`, `ipAddress`, `device.fingerprint` |
 | Fiat deposits (incoming payments) | `Deposit` | `client.deposits.createDeposit` | `initiatedBy` must be a Corsa client ID |
 | Fiat withdrawals (outgoing payments) | `Withdrawal` | `client.withdrawals.createWithdrawal` | `initiatedBy` must be a Corsa client ID |
@@ -53,6 +54,8 @@ Step 5: Operations — Deposits, Withdrawals, Trades
 Step 6: Alerts (reference client + transaction IDs)
          ↓
 Step 7: Cases (reference alert + client + transaction IDs)
+         ↓
+Step 8: Verifications (KYC/KYB results via POST /v1/clients/{clientId}/verifications)
 ```
 
 **Key rule:** `initiatedBy` on operations and `associatedClients`/`associatedTransactions` on alerts expect Corsa-generated UUIDs — not your internal IDs. Always look up the Corsa ID from your mapping table or use `referenceId` where supported.
