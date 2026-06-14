@@ -91,10 +91,11 @@ Follow this order. Entities reference their parents, so parents must exist first
 
 1. **Clients** — Individual and Corporate clients (the foundation)
 2. **Members** — UBOs, directors, signatories for corporate clients
-3. **Accounts & Wallets** — Bank accounts and blockchain wallets, associated with clients
+3. **Accounts & Wallets** — Bank accounts, blockchain wallets, and payment accounts, associated with clients
 4. **Sessions** — Client sessions with device/IP data for fraud detection
 5. **Operations** — Deposits, Withdrawals, Trades (reference the initiating client by ID)
 6. **Alerts & Cases** — External alerts and investigation cases (reference clients/transactions)
+7. **Verifications** — KYC/KYB results from identity providers (SumSub, Persona, etc.)
 
 ## SDK Services
 
