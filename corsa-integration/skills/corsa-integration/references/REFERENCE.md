@@ -883,14 +883,19 @@ For developers using the REST API directly (curl, fetch, etc.), all endpoints ar
 |--------|--------|-----|--------|
 | Individual Clients | `POST /v1/clients/individuals?upsert=true` | `GET /v1/clients/individuals/{id}` | `PUT /v1/clients/individuals/{id}` |
 | Corporate Clients | `POST /v1/clients/corporates?upsert=true` | `GET /v1/clients/corporates/{id}` | `PUT /v1/clients/corporates/{id}` |
+| Individual Members | `POST /v1/members/individuals?upsert=true` | `GET /v1/members/individuals/{id}` | `PUT /v1/members/individuals/{id}` |
+| Corporate Members | `POST /v1/members/corporates?upsert=true` | `GET /v1/members/corporates/{id}` | `PUT /v1/members/corporates/{id}` |
 | Deposits | `POST /v1/operations/deposits?upsert=true` | `GET /v1/operations/deposits/{id}` | — |
 | Withdrawals | `POST /v1/operations/withdrawals?upsert=true` | `GET /v1/operations/withdrawals/{id}` | — |
 | Trades | `POST /v1/operations/trades` | `GET /v1/operations/trades/{id}` | `PUT /v1/operations/trades/{id}/updateStatus` |
+| Transfers | `POST /v1/operations/transfers?upsert=true` | `GET /v1/operations/transfers/{id}` | — |
 | Transactions | — | `GET /v1/transactions/{id}` | `PUT /v1/transactions/{id}`, `PUT /v1/transactions/{id}/updateStatus` |
 | Alerts | `POST /v1/alerts` | `GET /v1/alerts/{id}` | `PUT /v1/alerts/{id}` |
 | Cases | `POST /v1/cases` | `GET /v1/cases/{id}` | `PUT /v1/cases/{id}` |
 | Bank Accounts | `POST /v1/bank-accounts?upsert=true` | `GET /v1/bank-accounts/{id}` | `PUT /v1/bank-accounts/{id}` |
 | Blockchain Wallets | `POST /v1/blockchain-wallets?upsert=true` | `GET /v1/blockchain-wallets/{id}` | `PUT /v1/blockchain-wallets/{id}` |
+| Payment Accounts | `POST /v1/payment-accounts?upsert=true` | `GET /v1/payment-accounts/{id}` | `PUT /v1/payment-accounts/{id}` |
 | Sessions | `POST /v1/sessions` | `GET /v1/sessions/{id}` | `PUT /v1/sessions/{id}` |
+| Verifications | `POST /v1/clients/{clientId}/verifications` | `GET /v1/clients/{clientId}/verifications/lookup` | `PUT /v1/clients/{clientId}/verifications/{verificationId}` |
 
-Full endpoint documentation: [API Reference](https://api.corsa.finance/api-spec.json)
+Full endpoint documentation: [Corsa API Docs](https://docs.corsa.finance/api/data-ingestion)
