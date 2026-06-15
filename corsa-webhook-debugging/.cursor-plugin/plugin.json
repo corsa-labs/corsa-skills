@@ -1,7 +1,7 @@
 {
   "name": "corsa-webhook-debugging",
   "description": "Debug Corsa webhook delivery, signature verification, and event handling issues",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": { "name": "Corsa Labs" },
   "homepage": "https://docs.corsa.finance/webhooks",
   "repository": "https://github.com/corsa-labs/corsa-skills",
