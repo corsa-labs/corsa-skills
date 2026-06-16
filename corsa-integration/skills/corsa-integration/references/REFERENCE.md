@@ -56,9 +56,11 @@ Access: `client.clients`
 | `createIndividualClient(requestBody, upsert?)` | Create or upsert an individual client |
 | `updateIndividualClient(clientId, requestBody)` | Update an individual client |
 | `getIndividualClient(clientId, integrationId?)` | Get an individual client by ID |
+| `enableAutoModelRiskForIndividualClient(clientId, requestBody)` | Enable automatic model-driven risk for an individual client |
 | `createCorporateClient(requestBody, upsert?)` | Create or upsert a corporate client |
 | `updateCorporateClient(clientId, requestBody)` | Update a corporate client |
 | `getCorporateClient(clientId, includeMembers?, integrationId?)` | Get a corporate client by ID |
+| `enableAutoModelRiskForCorporateClient(clientId, requestBody)` | Enable automatic model-driven risk for a corporate client |
 
 ### Create Individual Client
 
@@ -345,6 +347,8 @@ Access: `client.transactions`
 | `getTransactionById(id, integrationId?)` | Get a transaction by ID or referenceId |
 | `updateTransaction(id, requestBody)` | Update a transaction |
 | `updateTransactionStatus(id, requestBody)` | Update a transaction's status |
+| `bulkUpdateTransactions(requestBody)` | Bulk update up to 100 transactions with the same fields |
+| `lookupTransactionsByHash(requestBody)` | Batch lookup transactions by blockchain txHash (max 100) |
 
 ### Update Transaction Status
 
@@ -371,11 +375,17 @@ Access: `client.alerts`
 | `createAlertsBatch(requestBody, failOnAssociation?)` | Batch create alerts (max 50) |
 | `getAlert(alertId)` | Get an alert by ID |
 | `updateAlert(alertId, requestBody)` | Update an alert |
+| `bulkUpdateAlert(requestBody)` | Bulk update alert fields across up to 100 alerts |
 | `bulkUpdateAlertStatus(requestBody)` | Bulk update alert statuses (max 100) |
 | `bulkAssignAlert(requestBody)` | Bulk assign alerts (max 100) |
 | `bulkEscalateAlert(requestBody)` | Bulk escalate alerts (max 100) |
 | `associateAlertWithTransactions(alertId, requestBody)` | Link alert to transactions |
 | `associateAlertWithClients(alertId, requestBody)` | Link alert to clients |
+| `addScreeningMatches(alertId, requestBody)` | Add screening matches to a screening alert (max 100) |
+| `updateScreeningMatch(alertId, matchId, requestBody)` | Update a screening match before a decision is recorded |
+| `decideScreeningMatch(alertId, matchId, requestBody)` | Record TRUE_MATCH / FALSE_MATCH / ESCALATED decision on a match |
+| `bulkDecideScreeningMatches(alertId, requestBody)` | Apply the same decision to multiple matches (max 100) |
+| `deleteScreeningMatch(alertId, matchId)` | Remove a screening match before a decision is recorded |
 
 ### Create Alert
 
