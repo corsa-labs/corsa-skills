@@ -117,6 +117,10 @@ All events follow the pattern `<entity>.<action>`:
 | Corporate Member | `corporate_member.created`, `corporate_member.updated` |
 | Blockchain Wallet | `blockchain_wallet.created`, `blockchain_wallet.updated` |
 | Bank Account | `bank_account.created`, `bank_account.updated` |
+| Payment Account | `payment_account.created`, `payment_account.updated` |
+| Checklist | `checklist.created`, `checklist.updated` |
+| Attachment | `attachment.created`, `attachment.updated`, `attachment.deleted` |
+| Form | `form_template.public_form_submitted` |
 
 **Note:** The SDK `WebhookEventType` enum only contains a subset (clients, alerts, cases). For the full list above, compare `event.type` as a string.
 
@@ -223,7 +227,7 @@ import {
 } from '@corsa-labs/sdk';
 ```
 
-**Coverage note:** The SDK provides typed event aliases for individual clients, corporate clients, and alerts only. Case events exist in the `WebhookEventType` enum (`CASE_CREATED`, `CASE_UPDATED`) but have no typed aliases. For cases, transactions, deposits, trades, members, wallets, and bank accounts, parse the payload as a plain object and switch on `event.type` as a string:
+**Coverage note:** The SDK provides typed event aliases for individual clients, corporate clients, and alerts only. Case events exist in the `WebhookEventType` enum (`CASE_CREATED`, `CASE_UPDATED`) but have no typed aliases. For cases, transactions, deposits, trades, members, wallets, bank accounts, payment accounts, checklists, attachments, and forms, parse the payload as a plain object and switch on `event.type` as a string:
 
 ```typescript
 const event = JSON.parse(rawBody) as { type: string; timestamp: string; data: Record<string, unknown> };
