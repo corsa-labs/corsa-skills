@@ -1,6 +1,6 @@
 # Corsa SDK — Full API Reference
 
-Complete method signatures and code templates for all 21 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
+Complete method signatures and code templates for all 22 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
 
 ## Authentication Setup
 
@@ -650,6 +650,20 @@ Access: `client.attachments`
 | `deleteAttachment(attachmentId)` | Delete an attachment |
 | `relateAttachments(requestBody)` | Relate attachments to an entity |
 | `createExternalDocument(requestBody)` | Create an external document attachment |
+
+---
+
+## Verifications Service
+
+Access: `client.verifications`
+
+### Methods
+
+| Method | Description |
+|--------|-------------|
+| `createVerification(clientId, requestBody)` | Create a KYC/KYB verification for a client. Returns 409 if one with the same provider + providerId already exists. |
+| `getVerification(clientId, provider, providerId)` | Look up a verification by provider and providerId. |
+| `updateVerification(clientId, verificationId, requestBody)` | Update an existing verification by ID. |
 
 ---
 
