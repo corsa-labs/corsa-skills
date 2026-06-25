@@ -721,6 +721,9 @@ All events follow the pattern `<entity>.<action>` where action is `created` or `
 | `blockchain_wallet.updated` | Blockchain wallet updated |
 | `bank_account.created` | Bank account created |
 | `bank_account.updated` | Bank account updated |
+| `payment_account.created` | Payment account created |
+| `payment_account.updated` | Payment account updated |
+| `form_template.public_form_submitted` | Customer submitted a public form |
 
 ### Webhook Payload Structure
 
