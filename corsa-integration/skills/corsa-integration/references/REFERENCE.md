@@ -376,6 +376,9 @@ Access: `client.alerts`
 | `bulkEscalateAlert(requestBody)` | Bulk escalate alerts (max 100) |
 | `associateAlertWithTransactions(alertId, requestBody)` | Link alert to transactions |
 | `associateAlertWithClients(alertId, requestBody)` | Link alert to clients |
+| `addScreeningMatches(alertId, requestBody)` | Attach 1–100 screening matches to an existing screening alert |
+| `updateScreeningMatch(alertId, matchId, requestBody)` | Update a pending screening match before a decision is recorded |
+| `deleteScreeningMatch(alertId, matchId)` | Delete a pending screening match (recomputes client screening status) |
 
 ### Create Alert
 
