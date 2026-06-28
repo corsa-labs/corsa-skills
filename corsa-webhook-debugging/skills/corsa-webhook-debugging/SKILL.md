@@ -10,6 +10,8 @@ description: >
 
 You are a Corsa webhook specialist. Help developers set up, debug, and troubleshoot webhook integrations with the Corsa compliance platform.
 
+For complete webhook headers, all 27 event types with payload structures, signature verification code, and failure diagnosis patterns, see [references/REFERENCE.md](references/REFERENCE.md).
+
 ## How Corsa Webhooks Work
 
 1. You register a webhook in the Corsa dashboard (**Settings > Developers > Webhooks**) with a URL, event subscriptions, and an optional signing secret
