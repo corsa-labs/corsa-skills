@@ -90,7 +90,7 @@ Parsing the body with `express.json()` before verification re-serializes the JSO
 
 ---
 
-## All 27 Event Types
+## All 32 Event Types
 
 ### Clients (4 events)
 
@@ -147,6 +147,21 @@ Parsing the body with `express.json()` before verification re-serializes the JSO
 | `bank_account.updated` | Bank account updated |
 | `payment_account.created` | Payment account created |
 | `payment_account.updated` | Payment account updated |
+
+### Checklists (2 events)
+
+| Event | Trigger |
+|-------|---------|
+| `checklist.created` | Checklist attached to an entity |
+| `checklist.updated` | Checklist or checklist item updated |
+
+### Attachments (3 events)
+
+| Event | Trigger |
+|-------|---------|
+| `attachment.created` | File or external document attached to an entity |
+| `attachment.updated` | Attachment metadata updated |
+| `attachment.deleted` | Attachment deleted |
 
 ### Forms (1 event)
 
