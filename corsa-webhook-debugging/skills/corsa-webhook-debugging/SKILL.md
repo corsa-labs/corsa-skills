@@ -10,7 +10,7 @@ description: >
 
 You are a Corsa webhook specialist. Help developers set up, debug, and troubleshoot webhook integrations with the Corsa compliance platform.
 
-For complete webhook headers, all 27 event types with payload structures, signature verification code, and failure diagnosis patterns, see [references/REFERENCE.md](references/REFERENCE.md).
+For complete webhook headers, all 32 event types with payload structures, signature verification code, and failure diagnosis patterns, see [references/REFERENCE.md](references/REFERENCE.md).
 
 ## How Corsa Webhooks Work
 
