@@ -99,7 +99,7 @@ Follow this order. Entities reference their parents, so parents must exist first
 
 ## SDK Services
 
-The `CorsaClient` exposes 21 services. Access them as properties on the client instance:
+The `CorsaClient` exposes 22 services. Access them as properties on the client instance:
 
 | Service | Access | Purpose |
 |---------|--------|---------|
@@ -123,6 +123,7 @@ The `CorsaClient` exposes 21 services. Access them as properties on the client i
 | `attachments` | `client.attachments` | File upload, download URLs, entity linking |
 | `subDispositions` | `client.subDispositions` | Custom sub-disposition CRUD |
 | `externalRules` | `client.externalRules` | External vendor rule management |
+| `verifications` | `client.verifications` | KYC/KYB verification create, update, lookup |
 | `platform` | `client.platform` | Platform configuration |
 
 For the full method reference for each service, see [references/REFERENCE.md](references/REFERENCE.md).
@@ -257,6 +258,10 @@ app.post('/webhook', (req, res) => {
 | `corporate_member.created` / `.updated` | Corporate member changes |
 | `blockchain_wallet.created` / `.updated` | Wallet changes |
 | `bank_account.created` / `.updated` | Bank account changes |
+| `payment_account.created` / `.updated` | Payment account changes |
+| `checklist.created` / `.updated` | Checklist changes |
+| `attachment.created` / `.updated` / `.deleted` | Attachment lifecycle |
+| `form_template.public_form_submitted` | Customer submitted a public form |
 
 ## Critical Rules
 
