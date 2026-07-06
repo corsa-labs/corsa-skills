@@ -78,9 +78,9 @@ import { verifyWebhookSignature } from '@corsa-labs/sdk';
 
 // verifyWebhookSignature is synchronous — returns boolean, not a Promise
 const isValid = verifyWebhookSignature(
-  req.body,                                 // raw Buffer — must use express.raw()
-  req.headers['x-hub-signature-256'],       // header value
-  process.env.CORSA_WEBHOOK_SECRET!
+  process.env.CORSA_WEBHOOK_SECRET!,        // secret
+  req.body.toString('utf-8'),               // raw body string — must use express.raw()
+  req.headers['x-hub-signature-256']        // header value
 );
 ```
 
@@ -90,7 +90,7 @@ Parsing the body with `express.json()` before verification re-serializes the JSO
 
 ---
 
-## All 27 Event Types
+## All 32 Event Types
 
 ### Clients (4 events)
 
@@ -147,6 +147,21 @@ Parsing the body with `express.json()` before verification re-serializes the JSO
 | `bank_account.updated` | Bank account updated |
 | `payment_account.created` | Payment account created |
 | `payment_account.updated` | Payment account updated |
+
+### Checklists (2 events)
+
+| Event | Trigger |
+|-------|---------|
+| `checklist.created` | Checklist created for an entity |
+| `checklist.updated` | Checklist or checklist item updated |
+
+### Attachments (3 events)
+
+| Event | Trigger |
+|-------|---------|
+| `attachment.created` | File attachment uploaded or linked to an entity |
+| `attachment.updated` | Attachment metadata updated |
+| `attachment.deleted` | Attachment deleted |
 
 ### Forms (1 event)
 

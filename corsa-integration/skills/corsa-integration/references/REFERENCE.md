@@ -1,6 +1,6 @@
 # Corsa SDK — Full API Reference
 
-Complete method signatures and code templates for all 21 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
+Complete method signatures and code templates for all 22 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
 
 ## Authentication Setup
 
