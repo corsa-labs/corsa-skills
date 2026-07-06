@@ -542,12 +542,12 @@ Access: `client.externalRules`
 | Method | Description |
 |--------|-------------|
 | `createExternalRule(requestBody)` | Create an external vendor rule |
-| `listExternalRules(page?, limit?, ...)` | List external rules with pagination |
+| `listExternalRules(params?)` | List external rules with pagination |
 | `getExternalRule(id)` | Get an external rule by ID |
 | `updateExternalRule(id, requestBody)` | Update an external vendor rule |
 | `deleteExternalRule(id)` | Soft-delete an external rule |
 | `checkRuleNameExists(name)` | Check if a rule name is already taken |
-| `getVendorNames()` | Get distinct vendor names across external rules |
+| `getExternalRuleVendors()` | Get distinct vendor names across external rules |
 
 External rules let you ingest alert signals from third-party vendors (Chainalysis, TRM Labs, etc.) and route them through Corsa's alert management workflow.
 
@@ -650,6 +650,22 @@ Access: `client.attachments`
 | `deleteAttachment(attachmentId)` | Delete an attachment |
 | `relateAttachments(requestBody)` | Relate attachments to an entity |
 | `createExternalDocument(requestBody)` | Create an external document attachment |
+
+---
+
+## Verifications Service
+
+Access: `client.verifications`
+
+### Methods
+
+| Method | Description |
+|--------|-------------|
+| `createVerification(clientId, requestBody)` | Create a KYC/KYB verification for a client |
+| `updateVerification(clientId, verificationId, requestBody)` | Update an existing verification's status or details |
+| `getVerification(clientId, provider, providerId)` | Look up a verification by provider and provider ID |
+
+Verifications record KYC/KYB results from identity providers (SumSub, Persona, etc.) against a client. Use `createVerification` to ingest results after onboarding, and `getVerification` to look up existing records by the provider's own applicant ID.
 
 ---
 
