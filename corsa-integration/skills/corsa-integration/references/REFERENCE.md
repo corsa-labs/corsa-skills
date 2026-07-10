@@ -906,8 +906,8 @@ For developers using the REST API directly (curl, fetch, etc.), all endpoints ar
 | Trades | `POST /v1/operations/trades` | `GET /v1/operations/trades/{id}` | `PUT /v1/operations/trades/{id}/updateStatus` |
 | Transfers | `POST /v1/operations/transfers?upsert=true` | `GET /v1/operations/transfers/{id}` | — |
 | Transactions | — | `GET /v1/transactions/{id}` | `PUT /v1/transactions/{id}`, `PUT /v1/transactions/{id}/updateStatus` |
-| Alerts | `POST /v1/alerts` | `GET /v1/alerts/{id}` | `PUT /v1/alerts/{id}` |
-| Cases | `POST /v1/cases` | `GET /v1/cases/{id}` | `PUT /v1/cases/{id}` |
+| Alerts | `POST /v1/alerts` | `GET /v1/alerts/{alertId}` | `PUT /v1/alerts/{alertId}/update` |
+| Cases | `POST /v1/cases` | `GET /v1/cases/{caseId}` | `PUT /v1/cases/{caseId}/update` |
 | Bank Accounts | `POST /v1/bank-accounts?upsert=true` | `GET /v1/bank-accounts/{id}` | `PUT /v1/bank-accounts/{id}` |
 | Blockchain Wallets | `POST /v1/blockchain-wallets?upsert=true` | `GET /v1/blockchain-wallets/{id}` | `PUT /v1/blockchain-wallets/{id}` |
 | Payment Accounts | `POST /v1/payment-accounts?upsert=true` | `GET /v1/payment-accounts/{id}` | `PUT /v1/payment-accounts/{id}` |
