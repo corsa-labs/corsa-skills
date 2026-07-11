@@ -45,11 +45,11 @@ Step 1: Clients (Individual + Corporate)
          ↓ store Corsa IDs
 Step 2: Members (link to corporate clients)
          ↓
-Step 3: Bank Accounts + Blockchain Wallets
+Step 3: Bank Accounts + Blockchain Wallets + Payment Accounts
          ↓ then associateWith Clients
 Step 4: Sessions (reference clientId)
          ↓
-Step 5: Operations — Deposits, Withdrawals, Trades
+Step 5: Operations — Deposits, Withdrawals, Trades, Transfers
          ↓ initiatedBy = Corsa client ID
 Step 6: Alerts (reference client + transaction IDs)
          ↓
