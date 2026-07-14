@@ -56,11 +56,11 @@ Access: `client.clients`
 | `createIndividualClient(requestBody, upsert?)` | Create or upsert an individual client |
 | `updateIndividualClient(clientId, requestBody)` | Update an individual client |
 | `getIndividualClient(clientId, integrationId?)` | Get an individual client by ID |
-| `enableAutoModelRiskForIndividualClient(clientId, requestBody)` | Enable automatic model-driven risk for an individual client |
+| `enableIndividualClientAutoModelRisk(clientId, requestBody)` | Enable automatic model-driven risk for an individual client |
 | `createCorporateClient(requestBody, upsert?)` | Create or upsert a corporate client |
 | `updateCorporateClient(clientId, requestBody)` | Update a corporate client |
 | `getCorporateClient(clientId, includeMembers?, integrationId?)` | Get a corporate client by ID |
-| `enableAutoModelRiskForCorporateClient(clientId, requestBody)` | Enable automatic model-driven risk for a corporate client |
+| `enableCorporateClientAutoModelRisk(clientId, requestBody)` | Enable automatic model-driven risk for a corporate client |
 
 ### Create Individual Client
 
@@ -383,8 +383,8 @@ Access: `client.alerts`
 | `associateAlertWithClients(alertId, requestBody)` | Link alert to clients |
 | `addScreeningMatches(alertId, requestBody)` | Add screening matches to a screening alert (max 100) |
 | `updateScreeningMatch(alertId, matchId, requestBody)` | Update a screening match before a decision is recorded |
-| `decideScreeningMatch(alertId, matchId, requestBody)` | Record TRUE_MATCH / FALSE_MATCH / ESCALATED decision on a match |
-| `bulkDecideScreeningMatches(alertId, requestBody)` | Apply the same decision to multiple matches (max 100) |
+| `recordScreeningMatchDecision(alertId, matchId, requestBody)` | Record TRUE_MATCH / FALSE_MATCH / ESCALATED decision on a match |
+| `recordBulkScreeningMatchDecision(alertId, requestBody)` | Apply the same decision to multiple matches (max 100) |
 | `deleteScreeningMatch(alertId, matchId)` | Remove a screening match before a decision is recorded |
 
 ### Create Alert
