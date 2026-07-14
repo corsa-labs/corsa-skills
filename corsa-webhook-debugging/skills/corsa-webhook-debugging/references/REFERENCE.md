@@ -77,6 +77,7 @@ function verifySignature(body: Buffer, secret: string, signature: string): boole
 import { verifyWebhookSignature } from '@corsa-labs/sdk';
 
 // verifyWebhookSignature is synchronous — returns boolean, not a Promise
+// Parameter order: (secret, rawBody, signatureHeader)
 const isValid = verifyWebhookSignature(
   process.env.CORSA_WEBHOOK_SECRET!,        // secret
   req.body.toString('utf-8'),               // raw body string — must use express.raw()
