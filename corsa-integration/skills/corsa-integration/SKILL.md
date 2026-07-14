@@ -69,11 +69,13 @@ Clients (Individual / Corporate)
 ├── Members (UBOs, Directors, Signatories) — corporate clients only
 ├── Bank Accounts
 ├── Blockchain Wallets
+├── Payment Accounts
 ├── Sessions (device fingerprinting, IP geolocation)
 └── Operations
     ├── Deposits → Transactions
     ├── Withdrawals → Transactions
-    └── Trades → Transactions
+    ├── Trades → Transactions
+    └── Transfers → Transactions
 
 Alerts ← linked to Clients and/or Transactions
 └── Cases ← escalated from Alerts, linked to Clients/Transactions/Alerts
@@ -81,7 +83,7 @@ Alerts ← linked to Clients and/or Transactions
 
 **Key relationships:**
 - Clients are the foundation — all other entities link back to them
-- Operations (Deposits, Withdrawals, Trades) contain Transactions
+- Operations (Deposits, Withdrawals, Trades, Transfers) contain Transactions
 - Alerts can be associated with both Clients and Transactions
 - Cases group related Alerts for investigation
 
