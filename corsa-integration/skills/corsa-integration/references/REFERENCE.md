@@ -381,11 +381,11 @@ Access: `client.alerts`
 | `bulkEscalateAlert(requestBody)` | Bulk escalate alerts (max 100) |
 | `associateAlertWithTransactions(alertId, requestBody)` | Link alert to transactions |
 | `associateAlertWithClients(alertId, requestBody)` | Link alert to clients |
-| `addScreeningMatches(alertId, requestBody)` | Add screening matches to a screening alert (max 100) |
-| `updateScreeningMatch(alertId, matchId, requestBody)` | Update a screening match before a decision is recorded |
+| `addScreeningMatches(alertId, requestBody)` | Attach 1–100 screening matches to an existing screening alert |
+| `updateScreeningMatch(alertId, matchId, requestBody)` | Update a pending screening match before a decision is recorded |
 | `recordScreeningMatchDecision(alertId, matchId, requestBody)` | Record TRUE_MATCH / FALSE_MATCH / ESCALATED decision on a match |
 | `recordBulkScreeningMatchDecision(alertId, requestBody)` | Apply the same decision to multiple matches (max 100) |
-| `deleteScreeningMatch(alertId, matchId)` | Remove a screening match before a decision is recorded |
+| `deleteScreeningMatch(alertId, matchId)` | Delete a pending screening match (recomputes client screening status) |
 
 ### Create Alert
 

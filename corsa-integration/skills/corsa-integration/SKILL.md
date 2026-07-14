@@ -260,7 +260,7 @@ app.post('/webhook', (req, res) => {
 | `corporate_member.created` / `.updated` | Corporate member changes |
 | `blockchain_wallet.created` / `.updated` | Wallet changes |
 | `bank_account.created` / `.updated` | Bank account changes |
-| `payment_account.created` / `.updated` | Payment account changes |
+| `payment_account.created` / `.updated` | Payment account changes (PIX, CLABE, mobile money) |
 | `checklist.created` / `.updated` | Checklist changes |
 | `attachment.created` / `.updated` / `.deleted` | Attachment lifecycle |
 | `form_template.public_form_submitted` | Customer submitted a public form |
