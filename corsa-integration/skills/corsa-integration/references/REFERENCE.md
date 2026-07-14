@@ -533,13 +533,21 @@ Access: `client.subDispositions`
 
 | Method | Description |
 |--------|-------------|
-| `listSubDispositions()` | List all sub-dispositions for the current platform |
+| `listSubDispositions(parentStatus?, entityType?, isActive?)` | List sub-dispositions for the current platform, optionally filtered |
 | `createSubDisposition(requestBody)` | Create a custom sub-disposition |
 | `getSubDisposition(id)` | Get a sub-disposition by ID |
 | `updateSubDisposition(id, requestBody)` | Update a sub-disposition |
 | `deleteSubDisposition(id)` | Soft-delete a custom sub-disposition |
 
-Sub-dispositions let you categorise alert outcomes beyond the standard `TRUE_POSITIVE` / `FALSE_POSITIVE` values (e.g. "Escalated to SAR", "Customer verified").
+Sub-dispositions add granular resolution reasons to Corsa's standard statuses. Each sub-disposition qualifies a **parent status** (`RESOLVED`, `ESCALATED`, `CLOSED_DISMISSED`, or `CLOSED_ESCALATION_TO_SAR`) for either `ALERT` or `CASE` entities — e.g. a `RESOLVED` alert with sub-disposition `false_positive_rule_tuning`.
+
+**`listSubDispositions` filter parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `parentStatus` | `string?` | Filter by parent status: `RESOLVED`, `ESCALATED`, `IN_REVIEW`, `CLOSED_DISMISSED`, or `CLOSED_ESCALATION_TO_SAR` |
+| `entityType` | `string?` | Filter by entity: `ALERT` or `CASE` |
+| `isActive` | `boolean?` | `true` for active only, `false` for inactive only, omit for all |
 
 ---
 
