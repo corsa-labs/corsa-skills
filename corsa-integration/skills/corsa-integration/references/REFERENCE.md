@@ -1,6 +1,6 @@
 # Corsa SDK — Full API Reference
 
-Complete method signatures and code templates for all 21 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
+Complete method signatures and code templates for all 22 services exposed by `CorsaClient` from `@corsa-labs/sdk`.
 
 ## Authentication Setup
 
@@ -56,9 +56,11 @@ Access: `client.clients`
 | `createIndividualClient(requestBody, upsert?)` | Create or upsert an individual client |
 | `updateIndividualClient(clientId, requestBody)` | Update an individual client |
 | `getIndividualClient(clientId, integrationId?)` | Get an individual client by ID |
+| `enableIndividualClientAutoModelRisk(clientId, requestBody)` | Enable automatic model-driven risk for an individual client |
 | `createCorporateClient(requestBody, upsert?)` | Create or upsert a corporate client |
 | `updateCorporateClient(clientId, requestBody)` | Update a corporate client |
 | `getCorporateClient(clientId, includeMembers?, integrationId?)` | Get a corporate client by ID |
+| `enableCorporateClientAutoModelRisk(clientId, requestBody)` | Enable automatic model-driven risk for a corporate client |
 
 ### Create Individual Client
 
@@ -345,6 +347,8 @@ Access: `client.transactions`
 | `getTransactionById(id, integrationId?)` | Get a transaction by ID or referenceId |
 | `updateTransaction(id, requestBody)` | Update a transaction |
 | `updateTransactionStatus(id, requestBody)` | Update a transaction's status |
+| `bulkUpdateTransactions(requestBody)` | Bulk update up to 100 transactions with the same fields |
+| `lookupTransactionsByHash(requestBody)` | Batch lookup transactions by blockchain txHash (max 100) |
 
 ### Update Transaction Status
 
@@ -371,6 +375,7 @@ Access: `client.alerts`
 | `createAlertsBatch(requestBody, failOnAssociation?)` | Batch create alerts (max 50) |
 | `getAlert(alertId)` | Get an alert by ID |
 | `updateAlert(alertId, requestBody)` | Update an alert |
+| `bulkUpdateAlert(requestBody)` | Bulk update alert fields across up to 100 alerts |
 | `bulkUpdateAlertStatus(requestBody)` | Bulk update alert statuses (max 100) |
 | `bulkAssignAlert(requestBody)` | Bulk assign alerts (max 100) |
 | `bulkEscalateAlert(requestBody)` | Bulk escalate alerts (max 100) |
@@ -378,6 +383,8 @@ Access: `client.alerts`
 | `associateAlertWithClients(alertId, requestBody)` | Link alert to clients |
 | `addScreeningMatches(alertId, requestBody)` | Attach 1–100 screening matches to an existing screening alert |
 | `updateScreeningMatch(alertId, matchId, requestBody)` | Update a pending screening match before a decision is recorded |
+| `recordScreeningMatchDecision(alertId, matchId, requestBody)` | Record TRUE_MATCH / FALSE_MATCH / ESCALATED decision on a match |
+| `recordBulkScreeningMatchDecision(alertId, requestBody)` | Apply the same decision to multiple matches (max 100) |
 | `deleteScreeningMatch(alertId, matchId)` | Delete a pending screening match (recomputes client screening status) |
 
 ### Create Alert
@@ -545,12 +552,12 @@ Access: `client.externalRules`
 | Method | Description |
 |--------|-------------|
 | `createExternalRule(requestBody)` | Create an external vendor rule |
-| `listExternalRules(page?, limit?, ...)` | List external rules with pagination |
+| `listExternalRules(params?)` | List external rules with pagination |
 | `getExternalRule(id)` | Get an external rule by ID |
 | `updateExternalRule(id, requestBody)` | Update an external vendor rule |
 | `deleteExternalRule(id)` | Soft-delete an external rule |
 | `checkRuleNameExists(name)` | Check if a rule name is already taken |
-| `getVendorNames()` | Get distinct vendor names across external rules |
+| `getExternalRuleVendors()` | Get distinct vendor names across external rules |
 
 External rules let you ingest alert signals from third-party vendors (Chainalysis, TRM Labs, etc.) and route them through Corsa's alert management workflow.
 
@@ -656,6 +663,22 @@ Access: `client.attachments`
 
 ---
 
+## Verifications Service
+
+Access: `client.verifications`
+
+### Methods
+
+| Method | Description |
+|--------|-------------|
+| `createVerification(clientId, requestBody)` | Create a KYC/KYB verification for a client |
+| `updateVerification(clientId, verificationId, requestBody)` | Update an existing verification's status or details |
+| `getVerification(clientId, provider, providerId)` | Look up a verification by provider and provider ID |
+
+Verifications record KYC/KYB results from identity providers (SumSub, Persona, etc.) against a client. Use `createVerification` to ingest results after onboarding, and `getVerification` to look up existing records by the provider's own applicant ID.
+
+---
+
 ## Platform Service
 
 Access: `client.platform`
@@ -724,6 +747,14 @@ All events follow the pattern `<entity>.<action>` where action is `created` or `
 | `blockchain_wallet.updated` | Blockchain wallet updated |
 | `bank_account.created` | Bank account created |
 | `bank_account.updated` | Bank account updated |
+| `payment_account.created` | Payment account (PIX, CLABE, mobile money) created |
+| `payment_account.updated` | Payment account updated |
+| `checklist.created` | Checklist created for an entity |
+| `checklist.updated` | Checklist or checklist item updated |
+| `attachment.created` | File attachment uploaded or linked to an entity |
+| `attachment.updated` | Attachment metadata updated |
+| `attachment.deleted` | Attachment deleted |
+| `form_template.public_form_submitted` | Client submitted a public form |
 
 ### Webhook Payload Structure
 
@@ -893,8 +924,8 @@ For developers using the REST API directly (curl, fetch, etc.), all endpoints ar
 | Trades | `POST /v1/operations/trades` | `GET /v1/operations/trades/{id}` | `PUT /v1/operations/trades/{id}/updateStatus` |
 | Transfers | `POST /v1/operations/transfers?upsert=true` | `GET /v1/operations/transfers/{id}` | — |
 | Transactions | — | `GET /v1/transactions/{id}` | `PUT /v1/transactions/{id}`, `PUT /v1/transactions/{id}/updateStatus` |
-| Alerts | `POST /v1/alerts` | `GET /v1/alerts/{id}` | `PUT /v1/alerts/{id}` |
-| Cases | `POST /v1/cases` | `GET /v1/cases/{id}` | `PUT /v1/cases/{id}` |
+| Alerts | `POST /v1/alerts` | `GET /v1/alerts/{alertId}` | `PUT /v1/alerts/{alertId}/update` |
+| Cases | `POST /v1/cases` | `GET /v1/cases/{caseId}` | `PUT /v1/cases/{caseId}/update` |
 | Bank Accounts | `POST /v1/bank-accounts?upsert=true` | `GET /v1/bank-accounts/{id}` | `PUT /v1/bank-accounts/{id}` |
 | Blockchain Wallets | `POST /v1/blockchain-wallets?upsert=true` | `GET /v1/blockchain-wallets/{id}` | `PUT /v1/blockchain-wallets/{id}` |
 | Payment Accounts | `POST /v1/payment-accounts?upsert=true` | `GET /v1/payment-accounts/{id}` | `PUT /v1/payment-accounts/{id}` |

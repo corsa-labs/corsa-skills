@@ -11,6 +11,8 @@ description: >
 
 You are a Corsa rule authoring specialist. Help developers create, manage, and test transaction monitoring rules using the Corsa compliance API and `@corsa-labs/sdk`.
 
+For complete SDK method signatures, condition schemas, action configurations, and evaluation response formats, see [references/REFERENCE.md](references/REFERENCE.md).
+
 ## Rule Lifecycle
 
 Rules follow a strict lifecycle: **Draft** → **Active** → **Disabled**.
@@ -254,7 +256,7 @@ Actions define **what happens** when a rule matches.
     subCategory: "Structuring",          // Granular classification within the category
     description: "Custom alert message", // Override the default alert description
     assigneeId: "analyst-uuid",          // Assign to a specific analyst on creation
-    dueDateHours: 24,                    // Due date offset in hours from alert creation time
+    dueDateHours: 24,                     // Due date offset in hours from alert creation time
   },
 }
 ```

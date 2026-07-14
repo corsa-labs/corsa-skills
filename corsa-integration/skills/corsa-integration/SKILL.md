@@ -69,11 +69,13 @@ Clients (Individual / Corporate)
 ├── Members (UBOs, Directors, Signatories) — corporate clients only
 ├── Bank Accounts
 ├── Blockchain Wallets
+├── Payment Accounts
 ├── Sessions (device fingerprinting, IP geolocation)
 └── Operations
     ├── Deposits → Transactions
     ├── Withdrawals → Transactions
-    └── Trades → Transactions
+    ├── Trades → Transactions
+    └── Transfers → Transactions
 
 Alerts ← linked to Clients and/or Transactions
 └── Cases ← escalated from Alerts, linked to Clients/Transactions/Alerts
@@ -81,7 +83,7 @@ Alerts ← linked to Clients and/or Transactions
 
 **Key relationships:**
 - Clients are the foundation — all other entities link back to them
-- Operations (Deposits, Withdrawals, Trades) contain Transactions
+- Operations (Deposits, Withdrawals, Trades, Transfers) contain Transactions
 - Alerts can be associated with both Clients and Transactions
 - Cases group related Alerts for investigation
 
@@ -99,7 +101,7 @@ Follow this order. Entities reference their parents, so parents must exist first
 
 ## SDK Services
 
-The `CorsaClient` exposes 21 services. Access them as properties on the client instance:
+The `CorsaClient` exposes 22 services. Access them as properties on the client instance:
 
 | Service | Access | Purpose |
 |---------|--------|---------|
@@ -123,6 +125,7 @@ The `CorsaClient` exposes 21 services. Access them as properties on the client i
 | `attachments` | `client.attachments` | File upload, download URLs, entity linking |
 | `subDispositions` | `client.subDispositions` | Custom sub-disposition CRUD |
 | `externalRules` | `client.externalRules` | External vendor rule management |
+| `verifications` | `client.verifications` | KYC/KYB verification create, update, lookup |
 | `platform` | `client.platform` | Platform configuration |
 
 For the full method reference for each service, see [references/REFERENCE.md](references/REFERENCE.md).
