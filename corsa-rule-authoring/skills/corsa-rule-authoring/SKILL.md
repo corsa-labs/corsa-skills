@@ -250,8 +250,13 @@ Actions define **what happens** when a rule matches.
   type: "CREATE_ALERT",
   config: {
     category: "TRANSACTION_MONITORING",
-    priority: "HIGH",   // Highest priority wins when multiple rules match
+    priority: "HIGH",      // Highest priority wins when multiple rules match
     status: "NEW",
+    // Optional routing fields:
+    subCategory: "Structuring",          // Granular classification within the category
+    description: "Custom alert message", // Override the default alert description
+    assigneeId: "analyst-uuid",          // Assign to a specific analyst on creation
+    dueDateHours: 24,                     // Due date offset in hours from alert creation time
   },
 }
 ```

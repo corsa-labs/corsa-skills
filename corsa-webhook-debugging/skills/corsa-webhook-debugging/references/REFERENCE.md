@@ -80,7 +80,7 @@ import { verifyWebhookSignature } from '@corsa-labs/sdk';
 // Parameter order: (secret, rawBody, signatureHeader)
 const isValid = verifyWebhookSignature(
   process.env.CORSA_WEBHOOK_SECRET!,        // secret
-  req.body,                                 // raw Buffer — must use express.raw()
+  req.body.toString('utf-8'),               // raw body string — must use express.raw()
   req.headers['x-hub-signature-256']        // header value
 );
 ```
