@@ -737,6 +737,14 @@ All events follow the pattern `<entity>.<action>` where action is `created` or `
 | `blockchain_wallet.updated` | Blockchain wallet updated |
 | `bank_account.created` | Bank account created |
 | `bank_account.updated` | Bank account updated |
+| `payment_account.created` | Payment account (PIX, CLABE, mobile money) created |
+| `payment_account.updated` | Payment account updated |
+| `checklist.created` | Checklist created for an entity |
+| `checklist.updated` | Checklist or checklist item updated |
+| `attachment.created` | File attachment uploaded or linked to an entity |
+| `attachment.updated` | Attachment metadata updated |
+| `attachment.deleted` | Attachment deleted |
+| `form_template.public_form_submitted` | Client submitted a public form |
 
 ### Webhook Payload Structure
 
