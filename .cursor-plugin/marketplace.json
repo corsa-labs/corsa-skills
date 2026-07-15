@@ -35,6 +35,12 @@
       "source": "corsa-risk-model-authoring",
       "description": "Author, simulate, deploy, and run Corsa risk-rating models (risk formulas) for individual and corporate clients",
       "keywords": ["compliance", "risk-rating", "risk-model", "risk-formula", "kyc", "kyb", "aml"]
+    },
+    {
+      "name": "corsa-risk-model-scoping",
+      "source": "corsa-risk-model-scoping",
+      "description": "Translate a compliance policy into a buildable Corsa risk-model description, bounded by real capabilities",
+      "keywords": ["compliance", "risk-rating", "risk-model", "policy", "kyc", "kyb", "aml", "scoping"]
     }
   ]
 }

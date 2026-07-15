@@ -1,0 +1,10 @@
+{
+  "name": "corsa-risk-model-scoping",
+  "description": "Translate a compliance policy into a buildable Corsa risk-model description, bounded by real capabilities",
+  "version": "0.1.0",
+  "author": { "name": "Corsa Labs" },
+  "homepage": "https://github.com/corsa-labs/risk-rating-service",
+  "repository": "https://github.com/corsa-labs/corsa-skills",
+  "license": "MIT",
+  "keywords": ["compliance", "risk-rating", "risk-model", "policy", "kyc", "kyb", "aml", "scoping"]
+}
