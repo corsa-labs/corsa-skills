@@ -35,6 +35,12 @@
       "source": "corsa-rule-engine-authoring",
       "description": "Author, test, and manage Corsa transaction-monitoring rules against rule-engine-service (deep, engine-accurate)",
       "keywords": ["compliance", "rules", "rule-engine", "transaction-monitoring", "aml", "aggregation", "velocity"]
+    },
+    {
+      "name": "corsa-rule-spec-drafting",
+      "source": "corsa-rule-spec-drafting",
+      "description": "Turn a compliance policy into an accurate, buildable Corsa transaction-monitoring rule description, bounded by real engine capabilities",
+      "keywords": ["compliance", "policy", "rules", "transaction-monitoring", "aml", "requirements", "spec"]
     }
   ]
 }
