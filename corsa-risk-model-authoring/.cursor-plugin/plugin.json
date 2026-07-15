@@ -1,0 +1,10 @@
+{
+  "name": "corsa-risk-model-authoring",
+  "description": "Author, simulate, deploy, and run Corsa risk-rating models (risk formulas)",
+  "version": "0.1.0",
+  "author": { "name": "Corsa Labs" },
+  "homepage": "https://github.com/corsa-labs/risk-rating-service",
+  "repository": "https://github.com/corsa-labs/corsa-skills",
+  "license": "MIT",
+  "keywords": ["compliance", "risk-rating", "risk-model", "risk-formula", "kyc", "kyb", "aml"]
+}
