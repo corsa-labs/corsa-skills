@@ -10,6 +10,8 @@ AI skills for integrating with the [Corsa](https://corsa.finance) compliance pla
 | **corsa-webhook-debugging** | Available | Debug webhook delivery, signature verification, and event handling |
 | **corsa-rule-authoring** | Available | Create and manage compliance rules for transaction monitoring |
 | **corsa-data-pipeline** | Available | Build production data pipelines — backfill, real-time sync, entity mapping |
+| **corsa-risk-model-authoring** | Available | Author, simulate, and run risk-rating models (risk formulas) for KYC/KYB |
+| **corsa-risk-model-scoping** | Available | Turn a compliance policy into a buildable risk-model description, bounded by real capabilities |
 
 ## Installation
 
@@ -25,6 +27,8 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.cursor/skills/
 cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline ~/.cursor/skills/
 cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging ~/.cursor/skills/
 cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring ~/.cursor/skills/
+cp -r corsa-skills/corsa-risk-model-authoring/skills/corsa-risk-model-authoring ~/.cursor/skills/
+cp -r corsa-skills/corsa-risk-model-scoping/skills/corsa-risk-model-scoping ~/.cursor/skills/
 ```
 
 ### Claude Code
@@ -35,6 +39,8 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.claude/skills/
 cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline ~/.claude/skills/
 cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging ~/.claude/skills/
 cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring ~/.claude/skills/
+cp -r corsa-skills/corsa-risk-model-authoring/skills/corsa-risk-model-authoring ~/.claude/skills/
+cp -r corsa-skills/corsa-risk-model-scoping/skills/corsa-risk-model-scoping ~/.claude/skills/
 ```
 
 ### VS Code / GitHub Copilot
@@ -45,6 +51,8 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration .github/skills/
 cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline .github/skills/
 cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging .github/skills/
 cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring .github/skills/
+cp -r corsa-skills/corsa-risk-model-authoring/skills/corsa-risk-model-authoring .github/skills/
+cp -r corsa-skills/corsa-risk-model-scoping/skills/corsa-risk-model-scoping .github/skills/
 ```
 
 ## Resources

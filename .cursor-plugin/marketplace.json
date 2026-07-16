@@ -29,6 +29,18 @@
       "source": "corsa-data-pipeline",
       "description": "Build production data pipelines to Corsa — backfill, real-time sync, entity mapping for exchanges and payment companies",
       "keywords": ["compliance", "fintech", "data-pipeline", "backfill", "sync", "exchange", "payments"]
+    },
+    {
+      "name": "corsa-risk-model-authoring",
+      "source": "corsa-risk-model-authoring",
+      "description": "Author, simulate, deploy, and run Corsa risk-rating models (risk formulas) for individual and corporate clients",
+      "keywords": ["compliance", "risk-rating", "risk-model", "risk-formula", "kyc", "kyb", "aml"]
+    },
+    {
+      "name": "corsa-risk-model-scoping",
+      "source": "corsa-risk-model-scoping",
+      "description": "Translate a compliance policy into a buildable Corsa risk-model description, bounded by real capabilities",
+      "keywords": ["compliance", "risk-rating", "risk-model", "policy", "kyc", "kyb", "aml", "scoping"]
     }
   ]
 }
