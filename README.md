@@ -1,6 +1,6 @@
 # Corsa Skills
 
-AI skills for integrating with the [Corsa](https://corsa.finance) compliance platform. Built on the [Agent Skills](https://agentskills.io) open standard — works with Cursor, Claude Code, VS Code / Copilot, OpenAI Codex CLI, Gemini CLI, and 35+ more AI tools.
+AI skills for integrating with the [Corsa](https://corsa.finance) compliance platform. Built on the [Agent Skills](https://agentskills.io) open standard — works with Cursor, Claude Code, VS Code / Copilot, OpenAI Codex CLI, Gemini CLI, and 40+ more AI tools.
 
 ## Available Skills
 
@@ -10,6 +10,8 @@ AI skills for integrating with the [Corsa](https://corsa.finance) compliance pla
 | **corsa-webhook-debugging** | Available | Debug webhook delivery, signature verification, and event handling |
 | **corsa-rule-authoring** | Available | Create and manage compliance rules for transaction monitoring |
 | **corsa-data-pipeline** | Available | Build production data pipelines — backfill, real-time sync, entity mapping |
+| **corsa-workflow-authoring** | Available | Author no-code compliance workflows — triggers, node trees, conditions, variables, and deployment via workflow-builder MCP tools or REST API |
+| **corsa-workflow-scoping** | Available | Translate a compliance policy into a workflow description grounded in real Corsa workflow capabilities |
 
 ## Installation
 
@@ -25,6 +27,8 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.cursor/skills/
 cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline ~/.cursor/skills/
 cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging ~/.cursor/skills/
 cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring ~/.cursor/skills/
+cp -r corsa-skills/corsa-workflow-authoring/skills/corsa-workflow-authoring ~/.cursor/skills/
+cp -r corsa-skills/corsa-workflow-scoping/skills/corsa-workflow-scoping ~/.cursor/skills/
 ```
 
 ### Claude Code
@@ -35,6 +39,8 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration ~/.claude/skills/
 cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline ~/.claude/skills/
 cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging ~/.claude/skills/
 cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring ~/.claude/skills/
+cp -r corsa-skills/corsa-workflow-authoring/skills/corsa-workflow-authoring ~/.claude/skills/
+cp -r corsa-skills/corsa-workflow-scoping/skills/corsa-workflow-scoping ~/.claude/skills/
 ```
 
 ### VS Code / GitHub Copilot
@@ -45,6 +51,8 @@ cp -r corsa-skills/corsa-integration/skills/corsa-integration .github/skills/
 cp -r corsa-skills/corsa-data-pipeline/skills/corsa-data-pipeline .github/skills/
 cp -r corsa-skills/corsa-webhook-debugging/skills/corsa-webhook-debugging .github/skills/
 cp -r corsa-skills/corsa-rule-authoring/skills/corsa-rule-authoring .github/skills/
+cp -r corsa-skills/corsa-workflow-authoring/skills/corsa-workflow-authoring .github/skills/
+cp -r corsa-skills/corsa-workflow-scoping/skills/corsa-workflow-scoping .github/skills/
 ```
 
 ## Resources

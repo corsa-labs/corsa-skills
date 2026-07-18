@@ -1,0 +1,10 @@
+{
+  "name": "corsa-workflow-scoping",
+  "description": "Translate a compliance policy into a grounded, capability-bounded workflow description for the workflow-builder agent — no hallucinated features",
+  "version": "0.1.0",
+  "author": { "name": "Corsa Labs" },
+  "homepage": "https://docs.corsa.finance/workflows",
+  "repository": "https://github.com/corsa-labs/corsa-skills",
+  "license": "MIT",
+  "keywords": ["compliance", "workflows", "policy", "scoping", "agent", "aml", "kyc"]
+}

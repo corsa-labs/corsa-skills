@@ -1,0 +1,10 @@
+{
+  "name": "corsa-workflow-authoring",
+  "description": "Author Corsa no-code compliance workflows — triggers, node trees, branches, and AI nodes — via the workflow-builder MCP tools or the workflow-definitions API",
+  "version": "0.1.0",
+  "author": { "name": "Corsa Labs" },
+  "homepage": "https://docs.corsa.finance/workflows",
+  "repository": "https://github.com/corsa-labs/corsa-skills",
+  "license": "MIT",
+  "keywords": ["compliance", "workflows", "automation", "aml", "kyc", "temporal", "mcp", "agent"]
+}
