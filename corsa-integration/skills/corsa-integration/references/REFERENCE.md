@@ -57,10 +57,12 @@ Access: `client.clients`
 | `updateIndividualClient(clientId, requestBody)` | Update an individual client |
 | `getIndividualClient(clientId, integrationId?)` | Get an individual client by ID |
 | `enableIndividualClientAutoModelRisk(clientId, requestBody)` | Enable automatic model-driven risk for an individual client |
+| `bulkUpdateIndividualClients(requestBody)` | Update multiple individual clients with the same fields (max 100) |
 | `createCorporateClient(requestBody, upsert?)` | Create or upsert a corporate client |
 | `updateCorporateClient(clientId, requestBody)` | Update a corporate client |
 | `getCorporateClient(clientId, includeMembers?, integrationId?)` | Get a corporate client by ID |
 | `enableCorporateClientAutoModelRisk(clientId, requestBody)` | Enable automatic model-driven risk for a corporate client |
+| `bulkUpdateCorporateClients(requestBody)` | Update multiple corporate clients with the same fields (max 100) |
 
 ### Create Individual Client
 
@@ -374,6 +376,7 @@ Access: `client.alerts`
 | `createAlert(requestBody, failOnAssociation?)` | Create an alert |
 | `createAlertsBatch(requestBody, failOnAssociation?)` | Batch create alerts (max 50) |
 | `getAlert(alertId)` | Get an alert by ID |
+| `getAlertsByEntity(entityType, entityId)` | Get all alerts linked to a specific entity (client, transaction, case) |
 | `updateAlert(alertId, requestBody)` | Update an alert |
 | `bulkUpdateAlert(requestBody)` | Bulk update alert fields across up to 100 alerts |
 | `bulkUpdateAlertStatus(requestBody)` | Bulk update alert statuses (max 100) |
@@ -413,8 +416,10 @@ Access: `client.cases`
 | Method | Description |
 |--------|-------------|
 | `createCase(requestBody)` | Create a case |
+| `createCasesBatch(requestBody)` | Batch create multiple cases (max 50) |
 | `getCase(caseId)` | Get a case by ID |
 | `updateCase(caseId, requestBody)` | Update a case |
+| `bulkUpdateCase(requestBody)` | Update multiple cases with the same fields (max 100) |
 | `bulkUpdateCaseStatus(requestBody)` | Bulk update case statuses (max 100) |
 | `bulkAssignCase(requestBody)` | Bulk assign cases (max 100) |
 | `bulkUpdateCaseReviewers(requestBody)` | Bulk update case reviewers (max 100) |
