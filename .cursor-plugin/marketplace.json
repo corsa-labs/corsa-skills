@@ -29,6 +29,30 @@
       "source": "corsa-data-pipeline",
       "description": "Build production data pipelines to Corsa — backfill, real-time sync, entity mapping for exchanges and payment companies",
       "keywords": ["compliance", "fintech", "data-pipeline", "backfill", "sync", "exchange", "payments"]
+    },
+    {
+      "name": "corsa-rule-engine-authoring",
+      "source": "corsa-rule-engine-authoring",
+      "description": "Deep rule authoring via REST API — full property catalog, advanced aggregations, lifecycle management, and evaluation",
+      "keywords": ["compliance", "fintech", "rules", "transaction-monitoring", "aml", "aggregation"]
+    },
+    {
+      "name": "corsa-rule-spec-drafting",
+      "source": "corsa-rule-spec-drafting",
+      "description": "Turn a compliance policy into a precise, buildable rule description scoped to what the rule engine can express",
+      "keywords": ["compliance", "fintech", "rules", "policy", "transaction-monitoring", "aml"]
+    },
+    {
+      "name": "corsa-workflow-authoring",
+      "source": "corsa-workflow-authoring",
+      "description": "Build no-code compliance workflows — triggers, node trees, AI Copilot blocks, conditions, and deployment",
+      "keywords": ["compliance", "fintech", "workflow", "automation", "no-code", "copilot"]
+    },
+    {
+      "name": "corsa-workflow-scoping",
+      "source": "corsa-workflow-scoping",
+      "description": "Translate a compliance policy into a grounded workflow description ready for implementation",
+      "keywords": ["compliance", "fintech", "workflow", "policy", "automation"]
     }
   ]
 }
