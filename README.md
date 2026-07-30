@@ -35,6 +35,17 @@ cp -r corsa-skills/corsa-workflow-authoring/skills/corsa-workflow-authoring ~/.c
 cp -r corsa-skills/corsa-workflow-scoping/skills/corsa-workflow-scoping ~/.cursor/skills/
 ```
 
+**Optional: Cursor rules for `corsa-integration`**
+
+The `corsa-integration` package also ships a Cursor rules file with SDK coding conventions (correct auth format, `referenceId` patterns, deprecated aliases). To install it alongside the skill:
+
+```bash
+mkdir -p ~/.cursor/rules
+cp corsa-skills/corsa-integration/rules/corsa-sdk-patterns.mdc ~/.cursor/rules/
+```
+
+This file has `alwaysApply: false` — Cursor will suggest it when you're working on files that match `**/*.ts`.
+
 ### Claude Code
 
 ```bash
