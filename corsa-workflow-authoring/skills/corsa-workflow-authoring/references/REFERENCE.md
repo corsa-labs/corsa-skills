@@ -102,11 +102,10 @@ Presence rule (`validateTriggerModeConfigConsistency`): exactly one of `triggerC
 the TRIGGER node's `data.triggerMode` must match (`EVENT`→triggerConfig, `SCHEDULED`→scheduleConfig).
 
 Server-set fields (never send): `id`, `platformId`, `status` (default DRAFT), `version` (default 1),
-`createdBy`/`updatedBy`, timestamps. `triggerConfig`/`nodes`/`scheduleConfig` persist as `simple-json`.
+`createdBy`/`updatedBy`, timestamps.
 
-**Node base** (`BaseWorkflowNodeDto`): `{ id (unique, non-empty), type, name (non-empty), parentNodeId?
-(string|null), data? }`. Discriminator: class-transformer maps `type` → per-type DTO with a nested `data`
-class; ACTION uses a single flat data class with a class-level constraint (not nested actionType DTOs).
+**Node base:** `{ id (unique, non-empty), type, name (non-empty), parentNodeId? (string|null), data? }`.
+Each node's `type` determines the shape of its `data` field.
 
 **Accepted `type` values:** `TRIGGER, ACTION, RECORD, NOTIFY, BRANCH, BRANCH_PATH, AI`. `CODE` exists in
 the runtime enum (legacy rows + a stub handler) but is rejected at the DTO and service layers.
@@ -119,32 +118,29 @@ Edges are derived from `parentNodeId`.
 
 ## 3. Node `data` schemas & runtime contracts
 
-Handlers receive an `ActivityContext` `{ platformId, instanceId, workflowDefinitionId, userId,
-userAccessToken, requestId, repetition? }` and return `HandlerResult` `{ success, status?, output?, error? }`
-(`status ∈ SUCCESS|FAILED|SKIPPED`). On FAILED the branch stops (children don't run); on SKIPPED children
-still run.
+Each node handler runs with the workflow execution context and returns a status of `SUCCESS`, `FAILED`, or `SKIPPED`. On FAILED the branch stops (children don't run); on SKIPPED children still run.
 
 ### 3.1 TRIGGER
 `data.triggerMode ∈ EVENT|SCHEDULED`, plus optional `filters`/`repeatConfig` (UI mirror only). Runtime just
 records `{ triggerMode, triggerEvent, entityCount }` and descends. No handler.
 
-### 3.2 ACTION (`WorkflowActionNodeDataDto`)
+### 3.2 ACTION
 Common fields: `actionType` (required enum), `description?`, `fromNodeId?` (upstream ancestor whose
 output/entity this uses; defaults to `parentNodeId`), `payload?`, `conditions?`, `repeatConfig?`,
 `missingAssociationBehavior?` (`FAIL|SKIP`). Per-actionType specifics and runtime:
 
-| actionType | Required (deploy) | Other `data` | Calls | Output keys |
-|---|---|---|---|---|
-| `SCREEN_CLIENT` | — | `clientId?`, `integrationId?` (default `chainalysis`), `syncType?` (default `partial`) | entity-service (verify client) → integrations-manager `POST /scheduler/trigger-sync` | `clientId, integrationId, syncType, integrationSyncTriggered, syncResult` |
-| `SCREEN_PEP_SANCTIONS` | `screeningType` (`PERSON\|COMPANY\|ENTITY`) | `threshold?` (0–1), `dataset?`, `createAlertOnMatch?`, `alertPriority?`, `alertCategory?` | entity-service → sanctions-service `/v1/screenings/{individuals\|companies\|entities}` | `screeningType, totalResults, matchCount, results[], alertCreated?, alertId?` (batch 10) |
-| `RUN_RISK_ASSESSMENT` | — | `formulaId?`, `entityType?`, `entityId?`, `entityData?` | risk-rating-service | `entityType, entityId?, formulaId, assessmentResult` |
-| `INITIATE_DEEP_RESEARCH` | — | `speed?` (`FAST\|SLOW`), `clientId?` | deep-research-agent `POST /v1/research/jobs` | `clientId, clientType, speed, jobId, jobStatus` (batch 10) |
-| `DOCUMENT_REQUEST` | `description` | `clientId?`, `caseCategory?` (default KYC), `casePriority?` (default MEDIUM), `reviewersIds?` | entity-service `createCase` | `clientId, caseCreated, caseResponse` |
-| `INFORMATION_REQUEST` | `description` | same as DOCUMENT_REQUEST | entity-service `createCase` | same |
-| `CLIENT_PERIODIC_REVIEW` | `description` | `clientId?`, `clientType?`, `reviewInterval?` (default `30d`), `priority?`, `assigneeId?` | entity-service `createAlert` (dueDate from interval) | `clientId, reviewInterval, dueDate, alertId, alertCreated` |
-| `CREATE_INTERACTION` | — | `interactionType?` (default NOTE), `notes?`, `category?`, `priority?`, `assigneeId?`, `dueDays?`/`dueDate?` | entity-service `createCase` per resolved client | `clientId, interactionType, caseId, caseCreated` |
-| `SEND_EMAIL` | `templateId` OR `body` (+`subject` if `body`) | `recipient?` (`"client"` or email), `clientId?`, `variableOverrides?`, `conditions?` | entity-service (client email) + messaging-service `sendMessage` | `templateId?, clientId, recipient, subject, messageId, threadId` |
-| `WEBHOOK` | `url` (HTTPS, no private/internal host) | `method?` (`POST\|PUT\|PATCH`, default POST), `headers?`, `payloadTemplate?`, `retries?` (≤10), `includeEventData?` (default true), `includePreviousResults?` (default false) | external HTTP (no auth token sent) | `url, method, statusCode` |
+| actionType | Required (deploy) | Other `data` | Output keys |
+|---|---|---|---|
+| `SCREEN_CLIENT` | — | `clientId?`, `integrationId?` (default `chainalysis`), `syncType?` (default `partial`) | `clientId, integrationId, syncType, integrationSyncTriggered, syncResult` |
+| `SCREEN_PEP_SANCTIONS` | `screeningType` (`PERSON\|COMPANY\|ENTITY`) | `threshold?` (0–1), `dataset?`, `createAlertOnMatch?`, `alertPriority?`, `alertCategory?` | `screeningType, totalResults, matchCount, results[], alertCreated?, alertId?` (batch 10) |
+| `RUN_RISK_ASSESSMENT` | — | `formulaId?`, `entityType?`, `entityId?`, `entityData?` | `entityType, entityId?, formulaId, assessmentResult` |
+| `INITIATE_DEEP_RESEARCH` | — | `speed?` (`FAST\|SLOW`), `clientId?` | `clientId, clientType, speed, jobId, jobStatus` (batch 10) |
+| `DOCUMENT_REQUEST` | `description` | `clientId?`, `caseCategory?` (default KYC), `casePriority?` (default MEDIUM), `reviewersIds?` | `clientId, caseCreated, caseResponse` |
+| `INFORMATION_REQUEST` | `description` | same as DOCUMENT_REQUEST | same |
+| `CLIENT_PERIODIC_REVIEW` | `description` | `clientId?`, `clientType?`, `reviewInterval?` (default `30d`), `priority?`, `assigneeId?` | `clientId, reviewInterval, dueDate, alertId, alertCreated` |
+| `CREATE_INTERACTION` | — | `interactionType?` (default NOTE), `notes?`, `category?`, `priority?`, `assigneeId?`, `dueDays?`/`dueDate?` | `clientId, interactionType, caseId, caseCreated` |
+| `SEND_EMAIL` | `templateId` OR `body` (+`subject` if `body`) | `recipient?` (`"client"` or email), `clientId?`, `variableOverrides?`, `conditions?` | `templateId?, clientId, recipient, subject, messageId, threadId` |
+| `WEBHOOK` | `url` (HTTPS, no private/internal host) | `method?` (`POST\|PUT\|PATCH`, default POST), `headers?`, `payloadTemplate?`, `retries?` (≤10), `includeEventData?` (default true), `includePreviousResults?` (default false) | `url, method, statusCode` |
 
 Allowed source-entity restrictions (`ACTION_REQUIRED_SOURCE_ENTITIES`): e.g. `DOCUMENT_REQUEST`/
 `CLIENT_PERIODIC_REVIEW` accept only `individual_client`/`corporate_client`; `WEBHOOK` accepts any.
@@ -177,20 +173,20 @@ on 404.
 (There is a separate `WorkflowRecordEventType` enum — `CLIENT_UPDATED`, `ALERT_CREATED`, … — used elsewhere;
 RECORD nodes use `entityType`+`operation`, not that enum.)
 
-### 3.4 NOTIFY (`WorkflowNotifyNodeDataDto`)
+### 3.4 NOTIFY
 `{ types?: [IN_APP|EMAIL|SLACK] | type?, message, subject?, recipients?, userIds?, fromNodeId?, repeatConfig? }`.
 `message` required (interpolated). Per channel:
 
-| Channel | Requires | Calls | Notes |
-|---|---|---|---|
-| `IN_APP` | `userIds[]` (UUIDs) | compliance-audit-service `createNotifications` | auto-links to the trigger entity's page when possible |
-| `EMAIL` | `recipients[]` (emails) | compliance-email-service `sendFormattedEmail` | `subject` interpolated (default "Workflow Notification"); appends an HTML summary of prior node outputs |
-| `SLACK` | `recipients[]` (user emails) | slack integration `POST /v1/slack/service/send-dm` | |
+| Channel | Requires | Notes |
+|---|---|---|
+| `IN_APP` | `userIds[]` (UUIDs) | Auto-links to the trigger entity's page when possible |
+| `EMAIL` | `recipients[]` (emails) | `subject` interpolated (default "Workflow Notification"); appends an HTML summary of prior node outputs |
+| `SLACK` | `recipients[]` (user emails) | Sends via configured Slack integration |
 
 Multi-channel output: `{ notificationTypes, results:[…perChannel] }`. A channel fails only if **all** its
 recipients fail. If the source node (`fromNodeId`/`parentNodeId`) was SKIPPED, NOTIFY returns SKIPPED.
-Distinct from ACTION `SEND_EMAIL` (which sends **client-facing** templated email via messaging-service);
-NOTIFY EMAIL is an **internal analyst** notification via email-service.
+Distinct from ACTION `SEND_EMAIL` (which sends **client-facing** templated email); NOTIFY EMAIL is an
+**internal analyst** notification.
 
 ### 3.5 BRANCH / BRANCH_PATH
 - BRANCH `data`: only `repeatConfig?`. Children must all be BRANCH_PATH; **2–20** of them; **≤1 default**
@@ -200,7 +196,7 @@ NOTIFY EMAIL is an **internal analyst** notification via email-service.
 - Runtime: single-entity mode evaluates each path's conditions (AND) and runs matched paths' children in
   parallel; bulk/scheduled mode partitions the entity batch per path.
 
-### 3.6 AI (`WorkflowAiNodeDataDto`) — feature-gated `ENABLE_WORKFLOW_AI_NODE`
+### 3.6 AI
 `{ modelId?, prompt?, outputJsonSchema?, toolGroups?, maxTokens?, temperature?, systemInstructions?,
 contextNodeIds?, context?, repeatConfig? }`.
 
@@ -212,15 +208,7 @@ contextNodeIds?, context?, repeatConfig? }`.
   workflow AI instructions (which enforce clean machine-consumable text); `contextNodeIds` inject named
   upstream successful outputs.
 
-**Execution — async fire + idempotent long-poll** against copilot-service:
-1. `POST /v1/async-tasks` with `{ idempotencyKey, prompt, outputSchema?, modelId, toolGroups, maxTokens,
-   temperature, systemInstructions, workflowContext }`. If it returns COMPLETED (idempotent replay), done.
-2. Register a cancellation listener → `DELETE /v1/async-tasks/{taskId}` on workflow cancel (best-effort).
-3. Poll `GET /v1/async-tasks/{taskId}?wait=30` (30s long-poll), heartbeating each iteration, until
-   COMPLETED/FAILED.
-
-- **Idempotency key:** `${instanceId}:${nodeId}:${repetition}[:entity:${entityId}]` — stable across Temporal
-  retries; unique per repetition and per bulk entity.
+**Execution — async, idempotent.** The AI node runs asynchronously and polls until the analysis completes or fails. Temporal retries are safe because idempotency is keyed on `${instanceId}:${nodeId}:${repetition}[:entity:${entityId}]` — stable across retries; unique per repetition and per bulk entity.
 - **Prompt enrichment:** (1) `{{variable}}` interpolation; (2) append `--- TRIGGER ENTITY DATA ---` block;
   (3) if `contextNodeIds`, append `--- CONTEXT FROM PREVIOUS STEPS ---` (SUCCESS outputs, `_meta` stripped).
 - **Output:** the model result spread at top level + `_meta: { nodeType:"AI", taskId, traceId, durationMs,
@@ -465,7 +453,6 @@ required data.** Reference of what it fixes:
 - **ACTION→RECORD coercion:** `actionType` matching `^(CREATE|UPDATE)_(ALERT|CASE|CLIENT|TRANSACTION)$` is
   rewritten to a RECORD node with derived `entityType`/`operation`. Also uppercases `actionType`/`method`.
 - **NOTIFY:** uppercase `type`; infer channel — `recipients`→`EMAIL`, `userIds`→`IN_APP`.
-- **graphql-mesh wrappers:** unwraps `{ Workflow<Type>NodeDto_Input: {...} }`.
 
 Not covered by the normalizer + not whitelisted ⇒ silently **stripped** by the validation pipe. Author the
 canonical shapes; don't depend on coercion.
@@ -479,7 +466,7 @@ canonical shapes; don't depend on coercion.
 | Nodes per workflow | 200 | definition |
 | Tree depth | 50 | definition |
 | Branch fan-out (paths per BRANCH) | 20 | definition |
-| Active workflows | 20 | per platform (bypassed under TEST_MODE) |
+| Active workflows | 20 | per platform |
 | Execution throttle | 10 / 60s | per definition per pod |
 | Entity dedup TTL | 30s | per (definition, entity) |
 | Scheduled entities per run | 5,000 (100/page × 50 pages) | per tick |
@@ -559,36 +546,3 @@ nodes → CANCELLED; otherwise pending → SKIPPED and run COMPLETED.
 }
 ```
 
----
-
-## 14. Source map (workflows-service)
-
-For deeper spelunking (paths under `src/`):
-
-- Agent surface: `mcp/workflow-builder-mcp.{controller,service}.ts`, `mcp/workflow-builder-tools.service.ts`,
-  `workflow-builder-drafts/workflow-builder-drafts.service.ts`,
-  `workflow-builder-drafts/workflow-builder-draft-validator.service.ts`,
-  `workflow-builder-drafts/dto/workflow-builder-draft-tools.dto.ts`,
-  `workflow-builder-drafts/entities/workflow-builder-draft.entity.ts`.
-- Definition schema: `workflow-definitions/dto/create-workflow-definition.dto.ts`,
-  `workflow-definitions/dto/nodes/*`, `workflow-definitions/dto/triggers/*`,
-  `workflow-definitions/dto/workflow-config-input.dto.ts`, `workflow-definitions/dto/schedule/*`,
-  `workflow-definitions/types/{workflow-node,workflow-trigger,workflow-trigger-event,workflow-schedule}.*`,
-  `workflow-definitions/workflow-validation-rules.ts`,
-  `workflow-definitions/dto/{workflow-trigger-catalog,workflow-variable-catalog}.dto.ts`.
-- Lifecycle & safety: `workflow-definitions/workflow-definitions.service.ts`,
-  `workflow-definitions/workflow-cycle-detection.service.ts`,
-  `workflow-definitions/normalization/workflow-input-normalizer.ts`,
-  `workflow-definitions/interceptors/workflow-input-normalization.interceptor.ts`.
-- Triggering & scheduling: `event-listener/{workflow-event.consumer,workflow-trigger-matching.service}.ts`,
-  `event-listener/workflow-throttle.service.ts`, `scheduler/workflow-scheduler.service.ts`,
-  `temporal/activities/scheduled-trigger.activities.ts`, `temporal/workflows/scheduled-trigger.workflow.ts`.
-- Execution: `temporal/workflows/run-workflow.workflow.ts`,
-  `temporal/activities/workflow-execution.activities.ts`, `temporal/activities/handlers/*` (one per node type),
-  `temporal/activities/handlers/{interpolate-message,condition-evaluation,trigger-event-utils,node-dispatcher}.ts`,
-  `temporal/activities/handlers/{ai.handler,workflow-ai-system-instructions,workflow-ai-task-idempotency.utils}.ts`.
-
-Internal deep-dive docs (internal-docs MCP, repo `workflows-service`): `architectural-patterns/
-{node-type-polymorphism-with-discriminator-dispatch, idempotent-ai-delegation, event-driven-trigger-matching,
-parent-child-tree-workflow-graph, versioned-definitions, input-normalization-interceptor,
-scheduled-event-driven, temporal-for-durable-execution, openapi-augmentation-middleware}` and `key-modules/*`.
