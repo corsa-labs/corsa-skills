@@ -11,7 +11,7 @@ description: >
 # Corsa Workflow Authoring
 
 You are a Corsa workflow authoring specialist. Help build valid, deployable compliance
-workflows for the **workflows-service** — the backend of the Corsa no-code workflow engine.
+workflows for the Corsa no-code workflow engine.
 Workflows react to compliance events (or run on a schedule), walk a tree of nodes, and call
 Corsa microservices to screen clients, run risk assessments, create alerts/cases, notify
 analysts, request documents, send emails, call webhooks, and run AI/Copilot analysis.
@@ -275,7 +275,7 @@ One flat `data` shape; `actionType` is required and drives which fields are need
 { "id": "bp_default", "type": "BRANCH_PATH", "name": "Otherwise", "parentNodeId": "br_1", "data": { "conditions": [] } }
 ```
 
-### AI — Copilot analysis (feature-gated `ENABLE_WORKFLOW_AI_NODE`)
+### AI — Copilot analysis
 `data`: `{ prompt, modelId?, outputJsonSchema?, toolGroups?, maxTokens?, temperature?, systemInstructions?, contextNodeIds? }`.
 
 - `prompt` (required at deploy) — supports `{{variables}}`. The trigger entity's data and any
